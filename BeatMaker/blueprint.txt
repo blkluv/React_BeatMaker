@@ -1,0 +1,73 @@
+O QUE SERÁ FEITO 
+        BEATMAKER :clica no quadrado pra setar a batida que toca dps de da play
+        PIANINHO: Emite Som ao clicar na nota
+
+
+
+        BEATMAKER
+            FRONTEND -> referencia print do whatsapp
+            16 quadrados em linha 
+            cada linha 1 som de bateria 
+            botao de play 
+            grid de acompanhar o beat 
+
+
+
+            FUNCIONALIDADES
+                clicar no quadrado muda de cor e ativa o som no tempo determinado
+                preview o grid de acompanhar o beat 
+                timbres diferentes para cada som de bateria 
+                botao Play/Pause
+                botao Rewind (volta pro começo)
+
+            
+
+        PIANINHO -> referencia pianinho do fl studio 
+            FRONTEND
+                estética de um piano 
+                hover de leves ao passar o mouse em cima 
+                indicativo da nota ou da tecla do teclado do pc
+
+
+            FUNCIONALIDADE
+                clicou tocou a nota 
+                uns 3 tipos diferentes de piano (piano , teclado, sintetizador)
+                enquanto manter clicado, a nota permanece tocando
+                mapear teclado do pc para reproduzir notas do teclado virtual 
+
+
+
+
+
+        GERAL
+            Views Paralelas:
+                Login
+                Cadastro
+                Musicas (MySQL)
+        
+            Importar Bibliotecas front end 
+                biblioteca react (Aceternity ui)
+                Biblioteca Jquery (Mask)
+                Bootstrap (Cadastro , Login , Músicas)
+                
+            Back end 
+                JSON ou PHP
+
+            Conectar com O Banco
+                MySQL
+
+            Bibliotecas de Som        
+                Javascript (new Audio)
+
+
+
+
+                PRIMEIRA SPRINT (31/10)
+                    GUILHERME 
+                        front do beatmaker 
+                        
+
+                    EDU
+                        Header 
+                        Footer 
+                        front do Piano 
