@@ -1,0 +1,30 @@
+main {
+    background-color: #252525;
+    height: 100dvh;
+}
+
+#botoes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+}
+
+#botoes label {
+    color: white;
+    font-size: 40px;
+    margin-right: 50px;
+}
+
+#parte1 {
+    border-bottom: solid 2px white;
+}
+
+#parte1 button {
+    margin-right: 30px;
+}
+
+.imagem_botao {
+    height: 30px;
+    width: auto;
+}

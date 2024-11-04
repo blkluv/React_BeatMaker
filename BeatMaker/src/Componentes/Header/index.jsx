@@ -7,14 +7,14 @@ export default function Header() {
             <header>
 
                 {/* Titulo do BeatMaker*/}
-                <div className='titulo'>
+                {/* <div className='titulo'>
                     <Link to="/">
                         <h1>
                             <span>BEAT</span>
                             <span>MAKER</span>
                         </h1>
                     </Link>
-                </div>
+                </div> */}
 
                 
             </header>
