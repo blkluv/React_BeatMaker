@@ -1,65 +1,127 @@
-/* CSS original fornecido */
+/* Estilo principal do container */
 main {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(18, 15, 15);
-  }
-  
-  .card {
-    background-color: rgb(25, 25, 25);
-    border-radius: 12px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .linha {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .quadrado {
-    width: 50px;
-    height: 50px;
-    background-color: rgb(52, 52, 52);
-    margin-bottom: 8px;
-    margin-top: 8px;
-  }
-  
-  .quadrado:hover {
-    cursor: pointer;
-    outline: blue solid 2px;
-  }
-  
-  #linhaTimer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .timer {
-    width: 50px;
-    height: 15px;
-    background-color: rgb(52, 52, 52);
-  }
-  
-  .config {
-    margin-bottom: 20px;
-  }
-  
-  .config label {
-    color: white;
-    margin-right: 10px;
-  }
-  
-  .config input {
-    width: 60px;
-    margin-right: 10px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #222; /* Cor de fundo */
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Card principal */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* Espaçamento uniforme entre as linhas */
+}
+
+/* Linha de números no topo */
+.linha-numeros {
+  display: flex;
+  gap: 8px; /* Espaçamento entre quadrados */
+  margin-bottom: 10px; /* Espaçamento igual ao das outras linhas */
+}
+
+.quadrado-numero {
+  width: 40px;
+  height: 40px;
+  background-color: rgb(52, 52, 52);
+  color: #ffd700; /* Amarelo */
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  user-select: none;
+}
+
+/* Estilo para as linhas de quadrados normais */
+.linha {
+  display: flex;
+  gap: 8px; /* Espaçamento horizontal entre quadrados */
+}
+
+/* Espaçamento igual entre todas as linhas */
+.card > .linha,
+.linha-especial,
+.linha-numeros {
+  margin-bottom: 10px; /* Mesma distância entre as linhas */
+}
+
+/* Estilo dos quadrados */
+.quadrado {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: rgb(52, 52, 52); /* Cor padrão */
+  transition: background-color 0.3s ease;
+  cursor: pointer; /* Cursor de clique */
+}
+
+/* Linha do timer (na base) */
+.linha-especial {
+  display: flex;
+  gap: 4px; /* Espaçamento entre quadrados */
+}
+
+.quadrado-especial {
+  width: 40px;
+  height: 40px;
+  background-color: rgb(52, 52, 52); /* Cor padrão */
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+/* Input BPM */
+.input-bpm {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.input-bpm label {
+  font-size: 16px;
+  color: #fff;
+}
+
+.input-bpm input {
+  width: 60px;
+  height: 30px;
+  padding: 5px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  background-color: #444;
+  color: #fff;
+  text-align: center;
+}
+
+/* Alterações de cor específicas para cada linha */
+#Linha1 .quadrado[data-active="true"] {
+  background-color: #34ad9d; /* Verde água */
+}
+
+#Linha2 .quadrado[data-active="true"] {
+  background-color: #c18e3b; /* Dourado */
+}
+
+#Linha3 .quadrado[data-active="true"] {
+  background-color: #0c60a4; /* Azul */
+}
+
+#Linha4 .quadrado[data-active="true"] {
+  background-color: #318b58; /* Verde escuro */
+}
+
+#Linha5 .quadrado[data-active="true"] {
+  background-color: #8f30a1; /* Roxo */
+}
+
+/* Quadrados ativos na linha do timer */
+.linha-especial .quadrado-especial[data-active="true"] {
+  background-color: #34ad9d; /* Verde água */
+}

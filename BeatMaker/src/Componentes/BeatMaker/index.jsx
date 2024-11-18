@@ -1,24 +1,27 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
 
-const QUADRADOS_POR_LINHA = 16;
-const TOTAL_LINHAS = 5;
+const QUADRADOS_POR_LINHA = 16; // Quantidade de quadrados por linha
+const TOTAL_LINHAS = 5; // Linhas de quadrados
+const NUMERO_DE_QUADRADOS = 16; // Quadrados da linha do timer
 
 // Cores definidas
 const COR_NORMAL = "rgb(52, 52, 52)";
 const COR_ESPECIAL = "rgb(83, 81, 81)";
 const CORES_LINHAS = ["#34AD9D", "#C18E3B", "#0C60A4", "#318B58", "#8F30A1"];
-const QUADRADOS_ESPECIAIS = [0, 4, 8, 12]; // Índices dos quadrados especiais
-const QUADRADOS_NORMAIS = [1, 2, 3, 5, 6, 7, 9, 10, 11, 13, 14, 15]; // Índices dos quadrados normais
+
+// Índices dos quadrados especiais
+const QUADRADOS_ESPECIAIS = [0, 4, 8, 12];
+
+// Função para calcular o tempo entre as batidas baseado no BPM
+const tempoEntreBatidas = (bpm) => (60 / bpm) * 1000;
 
 function App() {
   const [cores, setCores] = useState(() => {
-    // Inicializa todos os quadrados com a cor normal
-    const inicializarCores = Array(TOTAL_LINHAS).fill(null).map(() => 
-      Array(QUADRADOS_POR_LINHA).fill(COR_NORMAL)  // Inicializa todos os quadrados com COR_NORMAL
-    );
+    const inicializarCores = Array(TOTAL_LINHAS)
+      .fill(null)
+      .map(() => Array(QUADRADOS_POR_LINHA).fill(COR_NORMAL));
 
-    // ajusta os quadrados especiais com a COR_ESPECIAL nas linhas 1 a 5
     for (let i = 0; i < TOTAL_LINHAS; i++) {
       QUADRADOS_ESPECIAIS.forEach((indice) => {
         inicializarCores[i][indice] = COR_ESPECIAL;
@@ -28,7 +31,41 @@ function App() {
     return inicializarCores;
   });
 
-  // Função para alternar cor ao clicar
+  const [bpm, setBpm] = useState(60); // BPM inicial
+  const [linhaEspecial, setLinhaEspecial] = useState(
+    Array(NUMERO_DE_QUADRADOS).fill(COR_NORMAL)
+  ); // Linha extra
+  const [isTimerRunning, setIsTimerRunning] = useState(false); // Estado para o controle do timer
+
+  // Função para alterar o BPM a partir do input
+  const handleBpmChange = (event) => {
+    const novoBpm = parseInt(event.target.value, 10);
+    if (!isNaN(novoBpm) && novoBpm > 0) {
+      setBpm(novoBpm);
+    }
+  };
+
+  // Atualizar as cores da linha especial (timer) com base no BPM
+  useEffect(() => {
+    if (!isTimerRunning) return; // Se o timer não estiver ativo, não faz nada
+
+    const intervalo = tempoEntreBatidas(bpm);
+    let index = 0;
+
+    const intervalId = setInterval(() => {
+      setLinhaEspecial((prev) => {
+        const novaLinha = [...prev];
+        novaLinha.fill(COR_NORMAL); // Reseta todos os quadrados
+        novaLinha[index] = CORES_LINHAS[index % CORES_LINHAS.length]; // Atualiza a cor no índice atual
+        index = (index + 1) % NUMERO_DE_QUADRADOS; // Incrementa o índice
+        return novaLinha;
+      });
+    }, intervalo);
+
+    return () => clearInterval(intervalId); // Limpa o intervalo quando o componente desmonta ou o estado muda
+  }, [bpm, isTimerRunning]);
+
+  // Função para alternar a cor de qualquer quadrado
   const handleQuadradoClick = (linhaIndex, quadradoIndex) => {
     setCores((prev) => {
       const updated = prev.map((linha, i) =>
@@ -37,32 +74,47 @@ function App() {
       const linhaAtual = updated[linhaIndex];
       const corAtual = linhaAtual[quadradoIndex];
 
-      // Verifica se o quadrado é especial
       const isEspecial = QUADRADOS_ESPECIAIS.includes(quadradoIndex);
       if (isEspecial) {
-        // Quadrado especial alterna entre COR_ESPECIAL e a cor da linha
-        linhaAtual[quadradoIndex] = corAtual === COR_ESPECIAL
-          ? CORES_LINHAS[linhaIndex]
-          : COR_ESPECIAL;
+        linhaAtual[quadradoIndex] =
+          corAtual === COR_ESPECIAL ? CORES_LINHAS[linhaIndex] : COR_ESPECIAL;
       } else {
-        // Quadrado normal alterna entre COR_NORMAL e a cor da linha
-        linhaAtual[quadradoIndex] = corAtual === COR_NORMAL
-          ? CORES_LINHAS[linhaIndex]
-          : COR_NORMAL;
+        linhaAtual[quadradoIndex] =
+          corAtual === COR_NORMAL ? CORES_LINHAS[linhaIndex] : COR_NORMAL;
       }
 
       return updated;
     });
   };
 
+  // Função para alternar o estado do timer
+  const toggleTimer = () => {
+    setIsTimerRunning((prev) => !prev);
+  };
+
   return (
     <main>
       <div className="card">
-        {/* Renderiza as linhas e quadrados */}
+        {/* Linha extra com 16 quadrados e números */}
+        <div className="linha-numeros">
+          {Array(NUMERO_DE_QUADRADOS)
+            .fill(null)
+            .map((_, index) => (
+              <div className="quadrado-numero" key={index}>
+                {index + 1}
+              </div>
+            ))}
+        </div>
+
+        {/* Renderiza as linhas e quadrados normais */}
         {Array(TOTAL_LINHAS)
           .fill(null)
           .map((_, linhaIndex) => (
-            <div className="linha" key={`linha-${linhaIndex}`} id={`Linha${linhaIndex + 1}`}>
+            <div
+              className="linha"
+              key={`linha-${linhaIndex}`}
+              id={`Linha${linhaIndex + 1}`}
+            >
               {Array(QUADRADOS_POR_LINHA)
                 .fill(null)
                 .map((_, quadradoIndex) => (
@@ -70,13 +122,51 @@ function App() {
                     key={`quadrado-${linhaIndex}-${quadradoIndex}`}
                     className="quadrado"
                     style={{
-                      backgroundColor: cores[linhaIndex][quadradoIndex]
+                      backgroundColor: cores[linhaIndex][quadradoIndex],
                     }}
-                    onClick={() => handleQuadradoClick(linhaIndex, quadradoIndex)}
+                    onClick={() =>
+                      handleQuadradoClick(linhaIndex, quadradoIndex)
+                    }
                   ></div>
                 ))}
             </div>
           ))}
+
+        {/* Linha de retângulos especiais com números */}
+        <div className="linha-especial">
+          {linhaEspecial.map((cor, index) => (
+            <div
+              key={index}
+              className="quadrado-especial"
+              style={{
+                backgroundColor: cor,
+                width: "40px",
+                height: "20px",
+                margin: "2px",
+                display: "inline-block",
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Input para ajustar o BPM */}
+        <div className="input-bpm">
+          <label htmlFor="bpm">BPM: </label>
+          <input
+            id="bpm"
+            type="number"
+            value={bpm}
+            onChange={handleBpmChange}
+            min="1"
+          />
+        </div>
+
+        {/* Botão para controlar o timer */}
+        <div className="timer-control">
+          <button onClick={toggleTimer}>
+            {isTimerRunning ? "Parar Timer" : "Iniciar Timer"}
+          </button>
+        </div>
       </div>
     </main>
   );
