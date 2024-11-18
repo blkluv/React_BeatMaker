@@ -7,10 +7,10 @@ import Piano from "../../Componentes/Piano";
 export default function MainPage() {
     return (
         <>
-            <Header/>
+            {/* <Header/> */}
             <BeatMaker/>
-            <Piano/>
-            <Footer/>
+            {/* <Piano/>
+            <Footer/> */}
         </>
     )
 }

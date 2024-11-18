@@ -1,80 +1,65 @@
-main{
+/* CSS original fornecido */
+main {
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* margin-top: 150px; */
-    /* margin-left: 40%; */
     background-color: rgb(18, 15, 15);
-
-
-}
-.card{
+  }
+  
+  .card {
     background-color: rgb(25, 25, 25);
-   position: relative;
-   width: auto;
-   height: auto;
     border-radius: 12px;
     padding: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    
-}
-
-
-
-.linha{
-    
+  }
+  
+  .linha {
     display: flex;
-  gap: 10px;
-
-}
-
-.quadrado{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    width: 50px; 
-    height: 50px; 
+    gap: 10px;
+  }
+  
+  .quadrado {
+    width: 50px;
+    height: 50px;
     background-color: rgb(52, 52, 52);
-    margin-bottom: 15px;
-}
-.quadrado:hover{
+    margin-bottom: 8px;
+    margin-top: 8px;
+  }
+  
+  .quadrado:hover {
     cursor: pointer;
     outline: blue solid 2px;
-}
-
-#linhaTimer{
-display: flex;
-flex-direction: row;
-justify-content: space-evenly;
-align-items: center;
-gap: 10px;
-}
-
-#numeros{
-font-family: Arial, Helvetica, sans-serif;
-color: white;
-display: flex;
-flex-direction: row;
-justify-content: space-evenly;
-align-items: center;
-gap: 15px;
-}
-.timer{
+  }
+  
+  #linhaTimer {
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: space-evenly;
     align-items: center;
-    width: 50px; 
-    height: 15px; 
-    background-color:rgb(52, 52, 52);
-    margin-bottom: 15px;
-}
-#um , #cinco , #nove , #treze{
-    background-color: rgb(83, 81, 81);
-}
+    gap: 10px;
+  }
+  
+  .timer {
+    width: 50px;
+    height: 15px;
+    background-color: rgb(52, 52, 52);
+  }
+  
+  .config {
+    margin-bottom: 20px;
+  }
+  
+  .config label {
+    color: white;
+    margin-right: 10px;
+  }
+  
+  .config input {
+    width: 60px;
+    margin-right: 10px;
+  }
+  
