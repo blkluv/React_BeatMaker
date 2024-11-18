@@ -41,7 +41,7 @@ function App() {
   const handleBpmChange = (event) => {
     const novoBpm = parseInt(event.target.value, 10);
     if (!isNaN(novoBpm) && novoBpm > 0) {
-      setBpm(novoBpm);
+      setBpm(novoBpm );
     }
   };
 
@@ -49,7 +49,7 @@ function App() {
   useEffect(() => {
     if (!isTimerRunning) return; // Se o timer não estiver ativo, não faz nada
 
-    const intervalo = tempoEntreBatidas(bpm);
+    const intervalo = tempoEntreBatidas(bpm * 4);
     let index = 0;
 
     const intervalId = setInterval(() => {
