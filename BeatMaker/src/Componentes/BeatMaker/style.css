@@ -13,6 +13,8 @@ main {
 
 /* Card principal */
 .card {
+  height: auto;
+  width: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -76,17 +78,40 @@ main {
   transition: background-color 0.3s ease;
 }
 
+.card-header{
+  padding: 5px;
+  height: auto;
+  width: 100%;
+  display: flex;
+  align-items: start;
+  flex-direction: row;
+  align-items: center;
+}
 /* Input BPM */
 .input-bpm {
   display: flex;
   align-items: center;
   gap: 10px;
   margin-top: 15px;
+  margin-bottom: 10px;
+  width: max-content;
 }
 
 .input-bpm label {
   font-size: 16px;
   color: #fff;
+  
+
+}
+.input-bpm button{
+  width: auto;
+  height: auto;
+  padding: 5px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  background-color: #444;
+  color: #fff;
+  text-align: center;
 }
 
 .input-bpm input {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
+import * as Tone from "tone";
 
 const QUADRADOS_POR_LINHA = 16; // Quantidade de quadrados por linha
 const TOTAL_LINHAS = 5; // Linhas de quadrados
@@ -41,15 +42,36 @@ function App() {
   const handleBpmChange = (event) => {
     const novoBpm = parseInt(event.target.value, 10);
     if (!isNaN(novoBpm) && novoBpm > 0) {
-      setBpm(novoBpm );
+      setBpm(novoBpm);
     }
+  };
+
+  // Função recursiva para verificar os quadrados e tocar o som
+  const verificarLinhaRecursivamente = (linhaIndex, quadradoIndex = 0) => {
+    if (quadradoIndex >= QUADRADOS_POR_LINHA) return; // Base da recursão: se alcançar o fim da linha, encerra
+
+    const corAtual = cores[linhaIndex][quadradoIndex];
+    const corEsperada = QUADRADOS_ESPECIAIS.includes(quadradoIndex)
+      ? COR_ESPECIAL
+      : COR_NORMAL;
+
+    // Se a cor foi alterada pelo usuário, toca o som
+    if (corAtual !== corEsperada) {
+      const synth = new Tone.Synth().toDestination();
+      synth.triggerAttackRelease("C4", "8n");
+    }
+
+    // Próximo quadrado após um atraso baseado no BPM
+    setTimeout(() => {
+      verificarLinhaRecursivamente(linhaIndex, quadradoIndex + 1);
+    }, tempoEntreBatidas(bpm));
   };
 
   // Atualizar as cores da linha especial (timer) com base no BPM
   useEffect(() => {
     if (!isTimerRunning) return; // Se o timer não estiver ativo, não faz nada
 
-    const intervalo = tempoEntreBatidas(bpm * 4);
+    const intervalo = tempoEntreBatidas(bpm);
     let index = 0;
 
     const intervalId = setInterval(() => {
@@ -61,6 +83,9 @@ function App() {
         return novaLinha;
       });
     }, intervalo);
+
+    // Inicia a verificação da linha1
+    verificarLinhaRecursivamente(0);
 
     return () => clearInterval(intervalId); // Limpa o intervalo quando o componente desmonta ou o estado muda
   }, [bpm, isTimerRunning]);
@@ -95,15 +120,25 @@ function App() {
   return (
     <main>
       <div className="card">
-        {/* Linha extra com 16 quadrados e números */}
-        <div className="linha-numeros">
-          {Array(NUMERO_DE_QUADRADOS)
-            .fill(null)
-            .map((_, index) => (
-              <div className="quadrado-numero" key={index}>
-                {index + 1}
-              </div>
-            ))}
+        <div className="card-header">
+          {/* Input para ajustar o BPM */}
+          <div className="input-bpm">
+            <label htmlFor="bpm">BPM: </label>
+            <input
+              id="bpm"
+              type="number"
+              value={bpm}
+              onChange={handleBpmChange}
+              min="1"
+            />
+          </div>
+
+          {/* Botão para controlar o timer */}
+          <div className="timer-control">
+            <button onClick={toggleTimer}>
+              {isTimerRunning ? "Parar Timer" : "Iniciar Timer"}
+            </button>
+          </div>
         </div>
 
         {/* Renderiza as linhas e quadrados normais */}
@@ -132,6 +167,17 @@ function App() {
             </div>
           ))}
 
+        {/* Linha extra com 16 quadrados e números */}
+        <div className="linha-numeros">
+          {Array(NUMERO_DE_QUADRADOS)
+            .fill(null)
+            .map((_, index) => (
+              <div className="quadrado-numero" key={index}>
+                {index + 1}
+              </div>
+            ))}
+        </div>
+
         {/* Linha de retângulos especiais com números */}
         <div className="linha-especial">
           {linhaEspecial.map((cor, index) => (
@@ -147,25 +193,6 @@ function App() {
               }}
             />
           ))}
-        </div>
-
-        {/* Input para ajustar o BPM */}
-        <div className="input-bpm">
-          <label htmlFor="bpm">BPM: </label>
-          <input
-            id="bpm"
-            type="number"
-            value={bpm}
-            onChange={handleBpmChange}
-            min="1"
-          />
-        </div>
-
-        {/* Botão para controlar o timer */}
-        <div className="timer-control">
-          <button onClick={toggleTimer}>
-            {isTimerRunning ? "Parar Timer" : "Iniciar Timer"}
-          </button>
         </div>
       </div>
     </main>
