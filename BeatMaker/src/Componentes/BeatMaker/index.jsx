@@ -15,7 +15,7 @@ const CORES_LINHAS = ["#34AD9D", "#C18E3B", "#0C60A4", "#318B58", "#8F30A1"];
 const QUADRADOS_ESPECIAIS = [0, 4, 8, 12];
 
 // Função para calcular o tempo entre as batidas baseado no BPM
-const tempoEntreBatidas = (bpm) => (60 / bpm) * 1000;
+const tempoEntreBatidas = (bpm) => (60 / bpm) * 250;
 
 function App() {
   const [cores, setCores] = useState(() => {
@@ -48,22 +48,23 @@ function App() {
 
   // Função recursiva para verificar os quadrados e tocar o som
   const verificarLinhaRecursivamente = (linhaIndex, quadradoIndex = 0) => {
-    if (quadradoIndex >= QUADRADOS_POR_LINHA) return; // Base da recursão: se alcançar o fim da linha, encerra
+    if (quadradoIndex == 16) quadradoIndex = 0; // Base da recursão: se alcançar o fim da linha, encerra
 
     const corAtual = cores[linhaIndex][quadradoIndex];
     const corEsperada = QUADRADOS_ESPECIAIS.includes(quadradoIndex)
       ? COR_ESPECIAL
       : COR_NORMAL;
 
-    // Se a cor foi alterada pelo usuário, toca o som
-    if (corAtual !== corEsperada) {
-      const synth = new Tone.Synth().toDestination();
-      synth.triggerAttackRelease("C4", "8n");
-    }
+    
 
     // Próximo quadrado após um atraso baseado no BPM
     setTimeout(() => {
       verificarLinhaRecursivamente(linhaIndex, quadradoIndex + 1);
+      // Se a cor foi alterada pelo usuário, toca o som
+    if (corAtual !== corEsperada) {
+      const synth = new Tone.Synth().toDestination();
+      synth.triggerAttackRelease("C4", "2n");
+    }
     }, tempoEntreBatidas(bpm));
   };
 
@@ -117,6 +118,11 @@ function App() {
     setIsTimerRunning((prev) => !prev);
   };
 
+
+
+
+
+
   return (
     <main>
       <div className="card">
@@ -135,38 +141,12 @@ function App() {
 
           {/* Botão para controlar o timer */}
           <div className="timer-control">
-            <button onClick={toggleTimer}>
+            <button onClick={toggleTimer }>
               {isTimerRunning ? "Parar Timer" : "Iniciar Timer"}
             </button>
           </div>
         </div>
-
-        {/* Renderiza as linhas e quadrados normais */}
-        {Array(TOTAL_LINHAS)
-          .fill(null)
-          .map((_, linhaIndex) => (
-            <div
-              className="linha"
-              key={`linha-${linhaIndex}`}
-              id={`Linha${linhaIndex + 1}`}
-            >
-              {Array(QUADRADOS_POR_LINHA)
-                .fill(null)
-                .map((_, quadradoIndex) => (
-                  <div
-                    key={`quadrado-${linhaIndex}-${quadradoIndex}`}
-                    className="quadrado"
-                    style={{
-                      backgroundColor: cores[linhaIndex][quadradoIndex],
-                    }}
-                    onClick={() =>
-                      handleQuadradoClick(linhaIndex, quadradoIndex)
-                    }
-                  ></div>
-                ))}
-            </div>
-          ))}
-
+        
         {/* Linha extra com 16 quadrados e números */}
         <div className="linha-numeros">
           {Array(NUMERO_DE_QUADRADOS)
@@ -194,7 +174,34 @@ function App() {
             />
           ))}
         </div>
-      </div>
+ 
+
+        {/* Renderiza as linhas e quadrados normais */}
+        {Array(TOTAL_LINHAS)
+          .fill(null)
+          .map((_, linhaIndex) => (
+            <div
+              className="linha"
+              key={`linha-${linhaIndex}`}
+              id={`Linha${linhaIndex + 1}`}
+            >
+              {Array(QUADRADOS_POR_LINHA)
+                .fill(null)
+                .map((_, quadradoIndex) => (
+                  <div
+                    key={`quadrado-${linhaIndex}-${quadradoIndex}`}
+                    className="quadrado"
+                    style={{
+                      backgroundColor: cores[linhaIndex][quadradoIndex],
+                    }}
+                    onClick={() =>
+                      handleQuadradoClick(linhaIndex, quadradoIndex)
+                    }
+                  ></div>
+                ))}
+            </div>
+          ))}
+</div>
     </main>
   );
 }

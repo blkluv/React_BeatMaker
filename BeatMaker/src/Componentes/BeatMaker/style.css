@@ -83,9 +83,10 @@ main {
   height: auto;
   width: 100%;
   display: flex;
-  align-items: start;
-  flex-direction: row;
   align-items: center;
+  /* flex-direction: row; */
+  align-items: center;
+  gap: 10px;
 }
 /* Input BPM */
 .input-bpm {
@@ -94,7 +95,9 @@ main {
   gap: 10px;
   margin-top: 15px;
   margin-bottom: 10px;
-  width: max-content;
+  /* width: max-content; */
+  /* position: relative;
+  left: 100; */
 }
 
 .input-bpm label {
