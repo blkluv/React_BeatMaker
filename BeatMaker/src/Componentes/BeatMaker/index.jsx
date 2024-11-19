@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./style.css";
 import * as Tone from "tone";
 
@@ -37,6 +37,15 @@ function App() {
     Array(NUMERO_DE_QUADRADOS).fill(COR_NORMAL)
   ); // Linha extra
   const [isTimerRunning, setIsTimerRunning] = useState(false); // Estado para o controle do timer
+  const synth = useRef(null); // Armazena o sintetizador único
+  const intervalIdRef = useRef(null); // Ref para o ID do intervalo, usado para limpeza
+  const timeoutRef = useRef(null); // Ref para controlar o loop do som
+
+  // Inicializa o sintetizador uma vez
+  useEffect(() => {
+    synth.current = new Tone.Synth().toDestination();
+    return () => synth.current.dispose(); // Limpa o sintetizador ao desmontar
+  }, []);
 
   // Função para alterar o BPM a partir do input
   const handleBpmChange = (event) => {
@@ -48,23 +57,24 @@ function App() {
 
   // Função recursiva para verificar os quadrados e tocar o som
   const verificarLinhaRecursivamente = (linhaIndex, quadradoIndex = 0) => {
-    if (quadradoIndex == 16) quadradoIndex = 0; // Base da recursão: se alcançar o fim da linha, encerra
+    if (!isTimerRunning) return; // Para a execução se o timer não estiver rodando
+
+    if (quadradoIndex === 16) quadradoIndex = 0; // Reinicia a contagem na linha
 
     const corAtual = cores[linhaIndex][quadradoIndex];
     const corEsperada = QUADRADOS_ESPECIAIS.includes(quadradoIndex)
       ? COR_ESPECIAL
       : COR_NORMAL;
 
-    
+    timeoutRef.current = setTimeout(() => {
+      if (!isTimerRunning) return; // Interrompe se o timer foi parado
 
-    // Próximo quadrado após um atraso baseado no BPM
-    setTimeout(() => {
       verificarLinhaRecursivamente(linhaIndex, quadradoIndex + 1);
-      // Se a cor foi alterada pelo usuário, toca o som
-    if (corAtual !== corEsperada) {
-      const synth = new Tone.Synth().toDestination();
-      synth.triggerAttackRelease("C4", "2n");
-    }
+
+      // Toca som apenas se o timer estiver ativo
+      if (corAtual !== corEsperada && isTimerRunning) {
+        synth.current.triggerAttackRelease("C4", "8n");
+      }
     }, tempoEntreBatidas(bpm));
   };
 
@@ -75,7 +85,13 @@ function App() {
     const intervalo = tempoEntreBatidas(bpm);
     let index = 0;
 
-    const intervalId = setInterval(() => {
+    // Limpa o intervalo anterior, se existir
+    if (intervalIdRef.current) {
+      clearInterval(intervalIdRef.current);
+    }
+
+    // Cria o novo intervalo e armazena seu ID
+    intervalIdRef.current = setInterval(() => {
       setLinhaEspecial((prev) => {
         const novaLinha = [...prev];
         novaLinha.fill(COR_NORMAL); // Reseta todos os quadrados
@@ -85,10 +101,14 @@ function App() {
       });
     }, intervalo);
 
-    // Inicia a verificação da linha1
-    verificarLinhaRecursivamente(0);
+    verificarLinhaRecursivamente(0); // Inicia a verificação da linha 1
 
-    return () => clearInterval(intervalId); // Limpa o intervalo quando o componente desmonta ou o estado muda
+    return () => {
+      // Limpa o intervalo quando o componente for desmontado ou o timer parar
+      if (intervalIdRef.current) {
+        clearInterval(intervalIdRef.current);
+      }
+    };
   }, [bpm, isTimerRunning]);
 
   // Função para alternar a cor de qualquer quadrado
@@ -113,21 +133,31 @@ function App() {
     });
   };
 
-  // Função para alternar o estado do timer
-  const toggleTimer = () => {
-    setIsTimerRunning((prev) => !prev);
+  // Função para iniciar o timer e o som
+  const iniciarTimer = () => {
+    Tone.Transport.start(); // Inicia o transporte do Tone.js
+    setIsTimerRunning(true); // Altera o estado para iniciar o timer
   };
 
-
-
-
-
+  // Função para parar o timer e o som
+  const pararTimer = () => {
+    Tone.Transport.stop(); // Garante que o transporte seja parado
+    if (synth.current) {
+      synth.current.triggerRelease(); // Libera qualquer som tocando
+    }
+    if (intervalIdRef.current) {
+      clearInterval(intervalIdRef.current); // Limpa o intervalo do timer
+    }
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current); // Limpa o timeout do loop do som
+    }
+    setIsTimerRunning(false); // Altera o estado para parar o timer
+  };
 
   return (
     <main>
       <div className="card">
         <div className="card-header">
-          {/* Input para ajustar o BPM */}
           <div className="input-bpm">
             <label htmlFor="bpm">BPM: </label>
             <input
@@ -138,16 +168,15 @@ function App() {
               min="1"
             />
           </div>
-
-          {/* Botão para controlar o timer */}
           <div className="timer-control">
-            <button onClick={toggleTimer }>
-              {isTimerRunning ? "Parar Timer" : "Iniciar Timer"}
+            <button onClick={iniciarTimer}>
+              Iniciar
+            </button>
+            <button onClick={pararTimer}>
+              Parar
             </button>
           </div>
         </div>
-        
-        {/* Linha extra com 16 quadrados e números */}
         <div className="linha-numeros">
           {Array(NUMERO_DE_QUADRADOS)
             .fill(null)
@@ -157,8 +186,6 @@ function App() {
               </div>
             ))}
         </div>
-
-        {/* Linha de retângulos especiais com números */}
         <div className="linha-especial">
           {linhaEspecial.map((cor, index) => (
             <div
@@ -174,9 +201,6 @@ function App() {
             />
           ))}
         </div>
- 
-
-        {/* Renderiza as linhas e quadrados normais */}
         {Array(TOTAL_LINHAS)
           .fill(null)
           .map((_, linhaIndex) => (
@@ -201,7 +225,7 @@ function App() {
                 ))}
             </div>
           ))}
-</div>
+      </div>
     </main>
   );
 }
