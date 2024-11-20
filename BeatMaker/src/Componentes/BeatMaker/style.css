@@ -264,3 +264,18 @@ main {
   gap: 10px; /* Espaçamento entre os botões */
   margin-top: 5px;
 }
+
+.input-quadrado2 {
+  width: 150px;
+  height: 30px;
+  padding: 5px;
+  background-color: #444;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  display: none; /* Inicialmente escondido */
+  position: absolute; /* Posiciona o input sobre os outros elementos */
+  top: 6px; /* Alinha o select com o topo do elemento */
+  left: -320px; /* Posiciona o select à esquerda do nota-quadrado */
+  z-index: 10; /* Garante que o select fique sobre os outros elementos */
+}

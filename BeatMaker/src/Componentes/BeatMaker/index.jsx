@@ -2,13 +2,29 @@ import React, { useState, useEffect, useRef } from "react";
 import "./style.css";
 import * as Tone from "tone";
 import Nota from "../../assets/Nota.webp";
+import Kick from "../../songs/Kick.wav";
+import Overhead from "../../songs/acoustic-snare-mono-overhead-room-and-top-mic_120bpm.wav";
+import Hat from "../../songs/amapiano-closed-hat-bright.wav";
+import Stopm from "../../songs/boisterous-stomp-brazilian-kick_2bpm_C.wav";
+import Bass from "../../songs/classic-zay-808-bass_C.wav";
+import Snare from "../../songs/dior-snare_C_minor.wav";
+import Cowbell from "../../songs/low-percussive-brazilian-cowbell-one-shot_C.wav";
+import Squeak from "../../songs/processed-perc-squeak-low-3.wav";
 
 //Constantes DIVs
 const QUADRADOS_POR_LINHA = 16; 
 const TOTAL_LINHAS = 7; 
 const NUMERO_DE_QUADRADOS = 16; 
 
-
+//Sons fora do tone.js
+const kick = new Tone.Player(Kick).toDestination();
+const overhead = new Tone.Player(Overhead).toDestination();
+const hat = new Tone.Player(Hat).toDestination();
+const stopm = new Tone.Player(Stopm).toDestination();
+const bass = new Tone.Player(Bass).toDestination();
+const snare = new Tone.Player(Snare).toDestination();
+const cowbell = new Tone.Player(Cowbell).toDestination();
+const squeak = new Tone.Player(Squeak).toDestination();
 
 // Cores
 const COR_NORMAL = "rgb(52, 52, 52)";
@@ -127,11 +143,37 @@ function App() {
             // Toca a nota apenas se o quadrado estiver ativo
             if (corAtual !== corEsperada && corAtual === CORES_LINHAS[linhaIndex]) {
 
-              setInputValues((currentInputValues) => { //verifica o input antes de tocar a nota, permitindo trocar com o codigo rodando 
-                const notaAtual = currentInputValues[linhaIndex];
-                synths.current[linhaIndex].triggerAttackRelease(notaAtual, "16n");              
-              return currentInputValues
-            }); 
+                setInputValues((currentInputValues) => {
+                    setInputValues2((currentInputValues2) => {
+                      const notaAtual = currentInputValues[linhaIndex];
+                      const tipoSom = currentInputValues2[linhaIndex];
+            
+                      if (tipoSom === "Kick") {
+                        kick.start();
+                      } else if (tipoSom === "Overhead") {
+                        overhead.start();
+                      } else if (tipoSom === "Hat") {
+                        hat.start();
+                      } else if (tipoSom === "Stopm") {
+                        stopm.start();
+                      } else if (tipoSom === "Bass") {
+                        bass.start();
+                      } else if (tipoSom === "Snare") {
+                        snare.start();
+                      } else if (tipoSom === "Cowbell") {
+                        cowbell.start();
+                      } else if (tipoSom === "Squeak") {
+                        squeak.start();
+                      }
+                      else {
+                        synths.current[linhaIndex].triggerAttackRelease(notaAtual, "16n");
+                      }
+            
+                      return currentInputValues2; // Retorna o estado inalterado
+                    });
+            
+                    return currentInputValues; // Retorna o estado inalterado
+                  }); 
             }
           }
           return currentCores; // Mantém o estado inalterado
@@ -174,8 +216,11 @@ const [inputValues, setInputValues] = useState([
   'G4',  // Para a linha 4 (vazio como padrão)
   'A#4',   // Para a linha 5 (vazio como padrão)
   'C5'
-
 ]);
+
+const [inputValues2, setInputValues2] = useState([
+    'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal'
+  ]);
 
 // Função que é chamada quando o valor do select é alterado
 const handleInputChange = (linhaIndex, value) => {
@@ -183,6 +228,12 @@ const newInputValues = [...inputValues];
 newInputValues[linhaIndex] = value;
 setInputValues(newInputValues);
 };
+
+const handleInputChange2 = (linhaIndex, value) => {
+    const newInputValues = [...inputValues2];
+    newInputValues[linhaIndex] = value;
+    setInputValues2(newInputValues);
+    };
 
   return (
     <main>
@@ -239,7 +290,27 @@ setInputValues(newInputValues);
         key={`linha-${linhaIndex}`}
         id={`Linha${linhaIndex + 1}`}
         style={{ display: "flex", alignItems: "center", gap: "10px" }} // Flex para manter tudo na horizontal
-      >
+      > 
+      
+             {/* Select visível quando ativado */}
+             {quadradosVisiveis[linhaIndex] && (
+              <select
+                  value={inputValues2[linhaIndex]}
+                  onChange={(e) => handleInputChange2(linhaIndex, e.target.value)}
+                  className="input-quadrado2"
+                  style={{ marginRight: "10px", display: "block" }} // Adicionando display block para garantir visibilidade
+              >
+                  <option value="Normal">Normal</option>
+                  <option value="Kick">Kick</option>
+                  <option value="Overhead">Overhead</option>
+                  <option value="Hat">Hat</option>
+                  <option value="Stopm">Stopm</option>
+                  <option value="Bass">Bass</option>
+                  <option value="Snare">Snare</option>
+                  <option value="Cowbell">Cowbell</option>
+                  <option value="Squeak">Squeak</option>
+              </select>
+              )}
 
               {/* Select visível quando ativado */}
               {quadradosVisiveis[linhaIndex] && (
@@ -271,7 +342,7 @@ setInputValues(newInputValues);
               className="nota-quadrado"
               onClick={() => alternarVisibilidade(linhaIndex)}
               style={{ marginRight: "7px" }} // Espaço entre nota e o input
-              >
+w              >
               <img src={Nota} alt="nota musical" height={"40px"} width={"40px"} />
               </div>
 
