@@ -5,13 +5,18 @@ import Nota from "../../assets/Nota.webp";
 
 //Constantes
 const QUADRADOS_POR_LINHA = 16; 
-const TOTAL_LINHAS = 5; 
+const TOTAL_LINHAS = 7; 
 const NUMERO_DE_QUADRADOS = 16; 
 
 // Cores
 const COR_NORMAL = "rgb(52, 52, 52)";
 const COR_ESPECIAL = "rgb(83, 81, 81)";
-const CORES_LINHAS = ["#34AD9D", "#C18E3B", "#0C60A4", "#318B58", "#8F30A1"];
+const CORES_LINHAS = ["#34AD9D", "#C18E3B", "#0C60A4", "#318B58", "#8F30A1",
+  "#34AD9D", "#C18E3B", "#0C60A4", "#318B58", "#8F30A1",
+  "#34AD9D", "#C18E3B", "#0C60A4", "#318B58", "#8F30A1",
+
+
+];
 
 // Índices dos quadrados especiais
 const QUADRADOS_ESPECIAIS = [0, 4, 8, 12, 16, 20, 24];
@@ -48,6 +53,7 @@ function App() {
   const intervalIdRef = useRef(null); // Ref para o ID do intervalo
 
   // Inicializa sintetizadores para cada linha
+
   useEffect(() => {
     synths.current = CORES_LINHAS.map(() => new Tone.Synth().toDestination());
     return () => synths.current.forEach((synth) => synth.dispose());
@@ -161,9 +167,12 @@ const alternarVisibilidade = (linhaIndex) => {
 const [inputValues, setInputValues] = useState([
   'C4',  // Para a linha 1
   'D#4',  // Para a linha 2
-  'F4',  // Para a linha 3
+  'F4',
+  'F#4',  // Para a linha 3
   'G4',  // Para a linha 4 (vazio como padrão)
-  'A#4'   // Para a linha 5 (vazio como padrão)
+  'A#4',   // Para a linha 5 (vazio como padrão)
+  'C5'
+
 ]);
 
 // Função que é chamada quando o valor do select é alterado
