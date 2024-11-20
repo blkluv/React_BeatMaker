@@ -27,7 +27,8 @@ main {
 .linha-numeros {
   display: flex;
   gap: 8px; /* Espaçamento entre quadrados */
-  margin-bottom: 10px; /* Espaçamento igual ao das outras linhas */
+  margin-bottom: 0px;
+ 
 }
 
 .quadrado-numero {
@@ -49,12 +50,13 @@ main {
   align-items: center;
   justify-content: flex;
   gap: 8px; /* Espaçamento horizontal entre quadrados */
+  margin-bottom: 10px;
 }
 
 /* Espaçamento igual entre todas as linhas */
-.card > .linha,
-.linha-especial,
-.linha-numeros {
+
+.linha-especial
+ {
   margin-bottom: 10px; /* Mesma distância entre as linhas */
 }
 
@@ -75,11 +77,12 @@ main {
 }
 
 .quadrado-especial {
+  display: flex;
   width: 40px;
-  height: 40px;
+  height: 20px;
   background-color: rgb(52, 52, 52); /* Cor padrão */
   border-radius: 4px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.15s ease;
 }
 
 .card-header{

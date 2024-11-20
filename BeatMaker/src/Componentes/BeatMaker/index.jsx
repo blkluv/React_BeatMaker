@@ -3,9 +3,10 @@ import "./style.css";
 import * as Tone from "tone";
 import Nota from "../../assets/Nota.webp";
 
-const QUADRADOS_POR_LINHA = 16; // Quantidade de quadrados por linha
-const TOTAL_LINHAS = 5; // Total de linhas
-const NUMERO_DE_QUADRADOS = 16; // Quadrados da linha do timer
+//Constantes
+const QUADRADOS_POR_LINHA = 16; 
+const TOTAL_LINHAS = 5; 
+const NUMERO_DE_QUADRADOS = 16; 
 
 // Cores
 const COR_NORMAL = "rgb(52, 52, 52)";
@@ -13,12 +14,13 @@ const COR_ESPECIAL = "rgb(83, 81, 81)";
 const CORES_LINHAS = ["#34AD9D", "#C18E3B", "#0C60A4", "#318B58", "#8F30A1"];
 
 // Índices dos quadrados especiais
-const QUADRADOS_ESPECIAIS = [0, 4, 8, 12];
+const QUADRADOS_ESPECIAIS = [0, 4, 8, 12, 16, 20, 24];
 
 // Função para calcular o tempo entre as batidas baseado no BPM
 const tempoEntreBatidas = (bpm) => (60 / bpm) * 250;
 
 function App() {
+
   const [cores, setCores] = useState(() => {
     const inicializarCores = Array(TOTAL_LINHAS)
       .fill(null)
@@ -34,11 +36,15 @@ function App() {
   });
 
   const [bpm, setBpm] = useState(60); // BPM inicial
+
   const [linhaEspecial, setLinhaEspecial] = useState(
     Array(NUMERO_DE_QUADRADOS).fill(COR_NORMAL)
   ); // Linha do timer
+
   const [isTimerRunning, setIsTimerRunning] = useState(false); // Estado do timer
+
   const synths = useRef([]); // Sintetizadores individuais para cada linha
+  
   const intervalIdRef = useRef(null); // Ref para o ID do intervalo
 
   // Inicializa sintetizadores para cada linha
@@ -83,7 +89,7 @@ function App() {
       setIsTimerRunning(true);
     
       const intervalo = tempoEntreBatidas(bpm);
-      let index = 0;
+      let index = -1;
     
       if (intervalIdRef.current) {
         clearInterval(intervalIdRef.current);
@@ -94,22 +100,30 @@ function App() {
         setLinhaEspecial((prev) => {
           const novaLinha = [...prev];
           novaLinha.fill(COR_NORMAL);
+         
           novaLinha[index] = CORES_LINHAS[index % CORES_LINHAS.length];
+          
           return novaLinha;
         });
     
         // Verifica e toca as notas correspondentes
         setCores((currentCores) => {
+
           for (let linhaIndex = 0; linhaIndex < TOTAL_LINHAS; linhaIndex++) {
+            
             const corAtual = currentCores[linhaIndex][index];
             const corEsperada = QUADRADOS_ESPECIAIS.includes(index)
               ? COR_ESPECIAL
               : COR_NORMAL;
-    
+          
             // Toca a nota apenas se o quadrado estiver ativo
             if (corAtual !== corEsperada && corAtual === CORES_LINHAS[linhaIndex]) {
-              const nota = inputValues[linhaIndex];
-              synths.current[linhaIndex].triggerAttackRelease(nota, "8n");
+
+              setInputValues((currentInputValues) => { //verifica o input antes de tocar a nota, permitindo trocar com o codigo rodando 
+                const notaAtual = currentInputValues[linhaIndex];
+                synths.current[linhaIndex].triggerAttackRelease(notaAtual, "16n");              
+              return currentInputValues
+            }); 
             }
           }
           return currentCores; // Mantém o estado inalterado
@@ -146,10 +160,10 @@ const alternarVisibilidade = (linhaIndex) => {
 // Estado para armazenar os valores dos selects
 const [inputValues, setInputValues] = useState([
   'C4',  // Para a linha 1
-  'C#4',  // Para a linha 2
-  'D4',  // Para a linha 3
-  'D#4',  // Para a linha 4 (vazio como padrão)
-  'E4'   // Para a linha 5 (vazio como padrão)
+  'D#4',  // Para a linha 2
+  'F4',  // Para a linha 3
+  'G4',  // Para a linha 4 (vazio como padrão)
+  'A#4'   // Para a linha 5 (vazio como padrão)
 ]);
 
 // Função que é chamada quando o valor do select é alterado
@@ -224,7 +238,7 @@ setInputValues(newInputValues);
                   className="input-quadrado"
                   style={{ marginRight: "10px", display: "block" }} // Adicionando display block para garantir visibilidade
               >
-                  <option value="">Selecione uma opção</option>
+            
                   <option value="C4">C</option>
                   <option value="C#4">C#</option>
                   <option value="D4">D</option>
@@ -237,6 +251,7 @@ setInputValues(newInputValues);
                   <option value="A4">A</option>
                   <option value="A#4">A#</option>
                   <option value="B4">B</option>
+                  <option value="C5">C oitava</option>
               </select>
               )}
 
@@ -244,7 +259,7 @@ setInputValues(newInputValues);
               <div
               className="nota-quadrado"
               onClick={() => alternarVisibilidade(linhaIndex)}
-              style={{ marginRight: "10px" }} // Espaço entre nota e o input
+              style={{ marginRight: "7px" }} // Espaço entre nota e o input
               >
               <img src={Nota} alt="nota musical" height={"40px"} width={"40px"} />
               </div>
