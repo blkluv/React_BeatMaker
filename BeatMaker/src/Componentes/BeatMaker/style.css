@@ -19,6 +19,8 @@ main {
   flex-direction: column;
   align-items: center;
   gap: 10px; /* Espaçamento uniforme entre as linhas */
+  margin-left: 50px;
+  justify-content: center;
 }
 
 /* Linha de números no topo */
@@ -44,6 +46,8 @@ main {
 /* Estilo para as linhas de quadrados normais */
 .linha {
   display: flex;
+  align-items: center;
+  justify-content: flex;
   gap: 8px; /* Espaçamento horizontal entre quadrados */
 }
 
@@ -87,6 +91,7 @@ main {
   /* flex-direction: row; */
   align-items: center;
   gap: 10px;
+  margin-left: 200px;
 }
 /* Input BPM */
 .input-bpm {
@@ -152,4 +157,107 @@ main {
 /* Quadrados ativos na linha do timer */
 .linha-especial .quadrado-especial[data-active="true"] {
   background-color: #34ad9d; /* Verde água */
+}
+
+.nota-quadrado {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: rgb(52, 52, 52); /* Cor padrão */
+  transition: background-color 0.3s ease;
+  cursor: pointer; /* Cursor de clique */
+  margin-right: 50px;
+}
+
+.linha :last-child {
+    margin-right: 30px;
+}
+
+/* Para garantir que o nota-quadrado e o input fiquem alinhados corretamente */
+.nota-quadrado {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: rgb(52, 52, 52); /* Cor padrão */
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  margin-right: 10px; /* Espaço entre o nota-quadrado e o input */
+  position: relative;
+}
+
+.input-quadrado {
+  width: 150px;
+  height: 30px;
+  padding: 5px;
+  background-color: #444;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  display: none; /* Inicialmente escondido */
+  position: absolute; /* Posiciona o input sobre os outros elementos */
+  top: 6px; /* Alinha o select com o topo do elemento */
+  left: -160px; /* Posiciona o select à esquerda do nota-quadrado */
+  z-index: 10; /* Garante que o select fique sobre os outros elementos */
+}
+
+/* Mostrar o input apenas quando for visível */
+.linha .input-quadrado.visible {
+  display: block; /* Torna o input visível quando a classe 'visible' for adicionada */
+}
+
+/* Estilo adicional para a linha */
+.linha {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaçamento uniforme entre os elementos */
+  flex-wrap: wrap; /* Permite que os elementos da linha se ajustem se necessário */
+  position: relative; /* Adicionado para definir o contexto de posicionamento */
+}
+
+
+
+.linha-quadrados {
+  display: flex;
+  gap: 8px; /* Espaçamento horizontal entre os quadrados */
+}
+
+.quadrado {
+  width: 40px;
+  height: 40px;
+  background-color: rgb(52, 52, 52); /* Cor padrão */
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.Botoes {
+  width: auto;
+  height: 40px;
+  padding: 10px 20px; /* Espaçamento interno para um tamanho confortável */
+  background-color: #444; /* Cor de fundo neutra */
+  color: #fff; /* Texto branco */
+  border: 1px solid #fff; /* Borda branca */
+  border-radius: 4px; /* Bordas arredondadas */
+  font-size: 14px; /* Tamanho do texto */
+  font-weight: bold; /* Texto destacado */
+  text-transform: uppercase; /* Texto em maiúsculas */
+  cursor: pointer; /* Cursor de clique */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Efeitos de transição */
+}
+
+.Botoes:hover {
+  background-color: #555; /* Cor mais clara ao passar o mouse */
+  transform: scale(1.05); /* Efeito de leve crescimento */
+}
+
+.Botoes:disabled {
+  background-color: #222; /* Cor mais escura quando desativado */
+  color: #666; /* Texto mais apagado */
+  cursor: not-allowed; /* Cursor indicando indisponibilidade */
+}
+
+.timer-control {
+  display: flex;
+  gap: 10px; /* Espaçamento entre os botões */
+  margin-top: 5px;
 }
