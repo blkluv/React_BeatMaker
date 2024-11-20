@@ -3,10 +3,12 @@ import "./style.css";
 import * as Tone from "tone";
 import Nota from "../../assets/Nota.webp";
 
-//Constantes
+//Constantes DIVs
 const QUADRADOS_POR_LINHA = 16; 
 const TOTAL_LINHAS = 7; 
 const NUMERO_DE_QUADRADOS = 16; 
+
+
 
 // Cores
 const COR_NORMAL = "rgb(52, 52, 52)";
