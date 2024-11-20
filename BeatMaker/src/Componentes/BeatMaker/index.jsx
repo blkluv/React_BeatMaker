@@ -45,7 +45,7 @@ function App() {
     return () => synths.current.forEach((synth) => synth.dispose());
   }, []);
 
-  const NOTAS_LINHAS = ["C4", "D4", "D#4", "F4", "G4"];
+  const NOTAS_LINHAS = ["C4", "D4", "E4", "F4", "G4"];
 
   const handleBpmChange = (event) => {
     const novoBpm = parseInt(event.target.value, 10);
