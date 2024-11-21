@@ -417,7 +417,7 @@ const handleInputChange2 = (linhaIndex, value) => {
               className="nota-quadrado"
               onClick={() => alternarVisibilidade(linhaIndex)}
               style={{ marginRight: "7px" }} // Espaço entre nota e o input
-w              >
+              >
               <img src={Nota} alt="nota musical" border-radius={"4px"} height={"40px"} width={"40px"} />
               </div>
 
