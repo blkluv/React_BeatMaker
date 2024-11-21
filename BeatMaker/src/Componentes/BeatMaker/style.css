@@ -309,3 +309,16 @@ img:hover{
   background-color: #555; /* Cor mais clara ao passar o mouse */
   transform: scale(1.05); /* Efeito de leve crescimento */
 }
+
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+   .linha-quadrados {
+    position: relative;
+    top: 0px;
+  }
+  /* Esconde as linhas a partir da 6ª 
+  Obs: não está funcionando, não sei pq */
+  .card .linha:nth-child(n+6) {
+    display: none;
+  }
+
+}

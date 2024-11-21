@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import "./style.css";
+import "./style2.css";
 import * as Tone from "tone";
 import Seta from "../../assets/Arrow down.png";
 import Nota from "../../assets/Nota.webp";

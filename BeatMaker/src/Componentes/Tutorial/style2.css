@@ -1,0 +1,419 @@
+/* Estilo principal do container */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    background-color: #222; /* Cor de fundo */
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Card principal */
+  .card {
+    height: auto;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Espaçamento uniforme entre as linhas */
+    margin-left: 50px;
+    justify-content: center;
+  }
+  
+  /* Linha de números no topo */
+  .linha-numeros {
+    display: flex;
+    gap: 8px; /* Espaçamento entre quadrados */
+    margin-bottom: 0px;
+   
+  }
+  
+  .quadrado-numero {
+    width: 40px;
+    height: 40px;
+    background-color: rgb(52, 52, 52);
+    color: #ffd700; /* Amarelo */
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    user-select: none;
+  }
+  
+  /* Estilo para as linhas de quadrados normais */
+  .linha {
+    display: flex;
+    align-items: center;
+    justify-content: flex;
+    gap: 8px; /* Espaçamento horizontal entre quadrados */
+    margin-bottom: 10px;
+  }
+  
+  /* Espaçamento igual entre todas as linhas */
+  
+  .linha-especial
+   {
+    margin-bottom: 10px; /* Mesma distância entre as linhas */
+  }
+  
+  /* Estilo dos quadrados */
+  .quadrado {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: rgb(52, 52, 52); /* Cor padrão */
+    transition: background-color 0.3s ease;
+    cursor: pointer; /* Cursor de clique */
+  }
+  
+  /* Linha do timer (na base) */
+  .linha-especial {
+    display: flex;
+    gap: 4px; /* Espaçamento entre quadrados */
+  }
+  
+  .quadrado-especial {
+    display: flex;
+    width: 40px;
+    height: 30px;
+    background-color: rgb(52, 52, 52); /* Cor padrão */
+    border-radius: 4px;
+    transition: background-color 0.15s ease;
+  }
+  
+  .card-header{
+    padding: 5px;
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+    margin-right: 116px;
+  }
+  /* Input BPM */
+  .input-bpm {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    /* width: max-content; */
+    /* position: relative;
+    left: 100; */
+  }
+  
+  .input-bpm label {
+    font-size: 16px;
+    color: #fff;
+    
+  
+  }
+  .input-bpm button{
+    width: auto;
+    height: auto;
+    padding: 5px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    background-color: #444;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .input-bpm input {
+    width: 60px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    background-color: #444;
+    color: #fff;
+    text-align: center;
+  }
+  
+  /* Alterações de cor específicas para cada linha */
+  #Linha1 .quadrado[data-active="true"] {
+    background-color: #34ad9d; /* Verde água */
+  }
+  
+  #Linha2 .quadrado[data-active="true"] {
+    background-color: #c18e3b; /* Dourado */
+  }
+  
+  #Linha3 .quadrado[data-active="true"] {
+    background-color: #0c60a4; /* Azul */
+  }
+  
+  #Linha4 .quadrado[data-active="true"] {
+    background-color: #318b58; /* Verde escuro */
+  }
+  
+  #Linha5 .quadrado[data-active="true"] {
+    background-color: #8f30a1; /* Roxo */
+  }
+  
+  /* Quadrados ativos na linha do timer */
+  .linha-especial .quadrado-especial[data-active="true"] {
+    background-color: #34ad9d; /* Verde água */
+  }
+  
+  .nota-quadrado {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: rgb(52, 52, 52); /* Cor padrão */
+    transition: background-color 0.3s ease;
+    cursor: pointer; /* Cursor de clique */
+    margin-right: 50px;
+  }
+  
+  .linha :last-child {
+      margin-right: 30px;
+  }
+  
+  /* Para garantir que o nota-quadrado e o input fiquem alinhados corretamente */
+  .nota-quadrado {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: rgb(52, 52, 52); /* Cor padrão */
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    margin-right: 10px; /* Espaço entre o nota-quadrado e o input */
+    position: relative;
+  }
+  
+  .input-quadrado {
+    width: 150px;
+    height: 30px;
+    padding: 5px;
+    background-color: #444;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    display: none; /* Inicialmente escondido */
+    position: absolute; /* Posiciona o input sobre os outros elementos */
+    top: 6px; /* Alinha o select com o topo do elemento */
+    left: -160px; /* Posiciona o select à esquerda do nota-quadrado */
+    z-index: 10; /* Garante que o select fique sobre os outros elementos */
+  }
+  
+  /* Mostrar o input apenas quando for visível */
+  .linha .input-quadrado.visible {
+    display: block; /* Torna o input visível quando a classe 'visible' for adicionada */
+  }
+  
+  /* Estilo adicional para a linha */
+  .linha {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaçamento uniforme entre os elementos */
+    flex-wrap: wrap; /* Permite que os elementos da linha se ajustem se necessário */
+    position: relative; /* Adicionado para definir o contexto de posicionamento */
+  }
+  
+  
+  
+  .linha-quadrados {
+    display: flex;
+    gap: 8px; /* Espaçamento horizontal entre os quadrados */
+  }
+  
+  .quadrado {
+    width: 40px;
+    height: 40px;
+    background-color: rgb(52, 52, 52); /* Cor padrão */
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+  .quadrado:hover{
+    border: 2px solid rgb(42, 97, 250);
+    box-sizing: border-box;
+  }
+  .Botoes {
+    width: auto;
+    height: 40px;
+    padding: 10px 20px; /* Espaçamento interno para um tamanho confortável */
+    background-color: #444; /* Cor de fundo neutra */
+    color: #fff; /* Texto branco */
+    border: 1px solid #fff; /* Borda branca */
+    border-radius: 4px; /* Bordas arredondadas */
+    font-size: 14px; /* Tamanho do texto */
+    font-weight: bold; /* Texto destacado */
+    text-transform: uppercase; /* Texto em maiúsculas */
+    cursor: pointer; /* Cursor de clique */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Efeitos de transição */
+  }
+  
+  .Botoes:hover {
+    background-color: #555; /* Cor mais clara ao passar o mouse */
+    transform: scale(1.05); /* Efeito de leve crescimento */
+  }
+  
+  .Botoes:disabled {
+    background-color: #222; /* Cor mais escura quando desativado */
+    color: #666; /* Texto mais apagado */
+    cursor: not-allowed; /* Cursor indicando indisponibilidade */
+  }
+  img:hover{
+   border-radius: 4px;
+    border: 2px solid rgb(42, 97, 250);
+    box-sizing: border-box;
+  }
+  .timer-control {
+    display: flex;
+    gap: 10px; /* Espaçamento entre os botões */
+    margin-top: 5px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .input-quadrado2 {
+    width: 150px;
+    height: 30px;
+    padding: 5px;
+    background-color: #444;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    display: none; /* Inicialmente escondido */
+    position: absolute; /* Posiciona o input sobre os outros elementos */
+    top: 6px; /* Alinha o select com o topo do elemento */
+    left: -320px; /* Posiciona o select à esquerda do nota-quadrado */
+    z-index: 10; /* Garante que o select fique sobre os outros elementos */
+  }
+  
+  #ajuda {
+    width: auto;
+    height: 20px;
+    padding: 5px 10px; /* Espaçamento interno para um tamanho confortável */
+    background-color: #444; /* Cor de fundo neutra */
+    color: #fff; /* Texto branco */
+    border: 1px solid #fff; /* Borda branca */
+    border-radius: 4px; /* Bordas arredondadas */
+    font-size: 10px; /* Tamanho do texto */
+    font-weight: bold; /* Texto destacado */
+    text-transform: uppercase; /* Texto em maiúsculas */
+    cursor: pointer; /* Cursor de clique */
+    margin-left: 50px;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Efeitos de transição */
+  }
+  
+  #ajuda:hover {
+    background-color: #555; /* Cor mais clara ao passar o mouse */
+    transform: scale(1.05); /* Efeito de leve crescimento */
+  }
+
+#tuto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#card {
+    margin-bottom: 200px;
+}
+
+.passos {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.botao-tutorial {
+    width: auto;
+    height: 20px;
+    padding: 5px 10px; /* Espaçamento interno para um tamanho confortável */
+    background-color: #444; /* Cor de fundo neutra */
+    color: #fff; /* Texto branco */
+    border: 1px solid #fff; /* Borda branca */
+    border-radius: 4px; /* Bordas arredondadas */
+    font-size: 10px; /* Tamanho do texto */
+    font-weight: bold; /* Texto destacado */
+    text-transform: uppercase; /* Texto em maiúsculas */
+    cursor: pointer; /* Cursor de clique */
+    margin-top: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Efeitos de transição */
+}
+
+.botao-tutorial:hover {
+    background-color: #555; /* Cor mais clara ao passar o mouse */
+    transform: scale(1.05); /* Efeito de leve crescimento */
+}
+
+#passo1 {
+    left: 140px;
+    top: 22px;
+}
+
+#passo2 {
+    top: 22px;
+    left: 230px;
+}
+
+#passo3 {
+    top: 22px;
+    left: 330px;
+}
+
+#passo4 {
+    right: 425px;
+    top: 130px;
+}
+
+#passo4 img {
+    position: relative;
+    top: 50px;
+    left: 5px;
+}
+
+#passo5 {
+    top: 350px;
+}
+
+#passo5 img {
+    transform: rotate(180deg);
+}
+
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+    .nota-quadrado {
+        position: relative;
+        right: 20px;
+    }
+    .linha-quadrados {
+        position: relative;
+        bottom: 50px;
+        left: 0px;
+    }
+    #passo4 {
+        right: 250px;
+        top: 100px;
+    }
+    #passo4 img {
+        position: relative;
+        left: -162px;
+        top: 80px;
+        height: 50px;
+    }
+    #passo5 {
+        position: relative;
+        top: 80px;
+        right: 180px;
+    }
+    #passo5 img {
+        transform: rotate(180deg);
+        position: relative;
+        top: 260px;
+        left: 10px;
+        height: 40px;
+    }
+}
