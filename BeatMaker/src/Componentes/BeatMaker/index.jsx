@@ -13,7 +13,7 @@ import Squeak from "../../songs/processed-perc-squeak-low-3.wav";
 
 //Constantes DIVs
 const QUADRADOS_POR_LINHA = 16; 
-const TOTAL_LINHAS = 7; 
+const TOTAL_LINHAS = 9; 
 const NUMERO_DE_QUADRADOS = 16; 
 
 //Sons fora do tone.js
@@ -219,7 +219,7 @@ const [inputValues, setInputValues] = useState([
 ]);
 
 const [inputValues2, setInputValues2] = useState([
-    'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal'
+    'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal'
   ]);
 
 // Função que é chamada quando o valor do select é alterado
@@ -343,7 +343,7 @@ const handleInputChange2 = (linhaIndex, value) => {
               onClick={() => alternarVisibilidade(linhaIndex)}
               style={{ marginRight: "7px" }} // Espaço entre nota e o input
 w              >
-              <img src={Nota} alt="nota musical" height={"40px"} width={"40px"} />
+              <img src={Nota} alt="nota musical" border-radius={"4px"} height={"40px"} width={"40px"} />
               </div>
 
 
