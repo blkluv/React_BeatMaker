@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 import * as Tone from "tone";
+import Seta from "../../assets/Arrow down.png";
 import Nota from "../../assets/Nota.webp";
 import Kick from "../../songs/Kick.wav";
 import Overhead from "../../songs/acoustic-snare-mono-overhead-room-and-top-mic_120bpm.wav";
@@ -14,7 +15,7 @@ import Squeak from "../../songs/processed-perc-squeak-low-3.wav";
 
 //Constantes DIVs
 const QUADRADOS_POR_LINHA = 16; 
-const TOTAL_LINHAS = 9; 
+const TOTAL_LINHAS = 1; 
 const NUMERO_DE_QUADRADOS = 16; 
 
 //Sons fora do tone.js
@@ -43,7 +44,7 @@ const QUADRADOS_ESPECIAIS = [0, 4, 8, 12, 16, 20, 24];
 // Função para calcular o tempo entre as batidas baseado no BPM
 const tempoEntreBatidas = (bpm) => (60 / bpm) * 250;
 
-function App() {
+function Tutorial() {
 
   const [cores, setCores] = useState(() => {
     const inicializarCores = Array(TOTAL_LINHAS)
@@ -236,9 +237,82 @@ const handleInputChange2 = (linhaIndex, value) => {
     setInputValues2(newInputValues);
     };
 
+    //Tutorial
+
+        const [step, setStep] = useState(0); // Estado para rastrear o passo atual
+    
+        const nextStep = () => {
+            setStep((prevStep) => prevStep + 1); // Avança para o próximo passo
+        };
+    
+
   return (
-    <main>
-      <div className="card">
+    <main id="tuto">
+      <div className="card" id="card">
+      <div className="tutorial">
+                    {step === 0 && (
+                        <div className="passos">
+                            <h2>Bem-Vindo ao Tutorial</h2>
+                            <button className="botao-tutorial" onClick={nextStep}>
+                                Continuar
+                            </button>
+                        </div>
+                    )}
+                    {step === 1 && (
+                        <div className="passos" id="passo1">
+                            <h4>Aqui é onde você irá configurar o BPM</h4>
+                            <button className="botao-tutorial" onClick={nextStep}>
+                                Continuar
+                            </button>
+                            <img src={Seta} alt="Seta indicando próximo passo" height="30px" />
+                        </div>
+                    )}
+                    {step === 2 && (
+                        <div className="passos" id="passo2">
+                            <h4>Aqui é onde começa a tocar</h4>
+                            <button className="botao-tutorial" onClick={nextStep}>
+                                Continuar
+                            </button>
+                            <img src={Seta} alt="Seta indicando próximo passo" height="30px" />
+                        </div>
+                    )}
+                    {step === 3 && (
+                        <div className="passos" id="passo3">
+                        <h4>Aqui é onde para de tocar</h4>
+                        <button className="botao-tutorial" onClick={nextStep}>
+                            Continuar
+                        </button>
+                        <img src={Seta} alt="Seta indicando próximo passo" height="30px" />
+                    </div>
+                    )}
+                    {step === 4 && (
+                        <div className="passos" id="passo4">
+                        <h4>Aqui é onde você escolhe as notas e/ou o instrumento</h4>
+                        <button className="botao-tutorial" onClick={nextStep}>
+                            Continuar
+                        </button>
+                        <img src={Seta} alt="Seta indicando próximo passo" height="30px" />
+                    </div>
+                    )}
+                    {step === 5 && (
+                        <div className="passos" id="passo5">
+                        <img src={Seta} alt="Seta indicando próximo passo" height="30px" />
+                        <h4>Aqui é onde você escolhe quando irá tocar o som</h4>
+                        <h4>Basta apertar no quadrado que queira</h4>
+                        <button className="botao-tutorial" onClick={nextStep}>
+                            Continuar
+                        </button>
+                    </div>
+                    )}
+                    {step > 5 && (
+                        <div className="passos">
+                            <h4>Tutorial Concluído</h4>
+                            <Link to="/BeatMaker"><button className="botao-tutorial">
+                                Começar
+                            </button></Link>
+                    </div>
+                    )}
+                </div>
         <div className="card-header">
           <div className="input-bpm">
             <label htmlFor="bpm">BPM: </label>
@@ -257,7 +331,6 @@ const handleInputChange2 = (linhaIndex, value) => {
             <button className="Botoes" onClick={pararTimer} disabled={!isTimerRunning}>
               Parar
             </button>
-            <Link to="/Tutorial"><button id="ajuda">Precisa de ajuda?</button></Link>
           </div>
         </div>
         <div className="linha-numeros">
@@ -372,4 +445,4 @@ w              >
   );
 }
 
-export default App;
+export default Tutorial;

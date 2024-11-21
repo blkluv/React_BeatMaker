@@ -1,7 +1,8 @@
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MainPage from '../View/MainPage';
-import Login from '../View/Login';
+import TutorialView from '../View/Tutorial';
+import EntradaView from '../View/Entrada';
 
 
 function App() {
@@ -10,9 +11,11 @@ function App() {
       <Router>
           <Routes>
               <Route path="/"
+              Component={EntradaView}/>
+              <Route path="/BeatMaker"
               Component={MainPage}/>
-              <Route path="/Login"
-              Component={Login}/>
+              <Route path="/Tutorial"
+              Component={TutorialView}/>
           </Routes>
       </Router>
     </>
