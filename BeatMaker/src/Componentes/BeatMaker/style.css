@@ -315,10 +315,57 @@ img:hover{
     position: relative;
     top: 0px;
   }
-  /* Esconde as linhas a partir da 6ª 
-  Obs: não está funcionando, não sei pq */
+  /* Esconde as linhas a partir da 6ª linha */
+  .card .linha:nth-child(n+8) {
+    display: none !important;
+  }
+
+  .card {
+    margin-top: 30px;
+  }
+
+  .input-quadrado {
+    position: relative;
+    margin-top: 300px;
+    margin-left: 600px;
+  }
+
+  .input-quadrado2 {
+    position: relative;
+    margin-top: 300px;
+    margin-left: 600px;
+  }
+
+}
+
+@media screen and (max-width: 932px) and (orientation: landscape) {
+  .linha-quadrados {
+    position: relative !important;
+    left: 40px !important;
+    top: -50px !important;
+  }
+
+  .card {
+    margin-top: 0px;
+  }
+
   .card .linha:nth-child(n+6) {
-    display: none;
+    display: none !important;
+  }
+
+  .nota-quadrado {
+    position: relative;
+    left: -20px;    
+  }
+
+  .input-quadrado {
+    position: relative;
+    margin-top: 50px;
+  }
+
+  .input-quadrado2 {
+    position: relative;
+    margin-top: 50px;
   }
 
 }

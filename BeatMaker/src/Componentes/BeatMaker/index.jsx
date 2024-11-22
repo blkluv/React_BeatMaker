@@ -196,16 +196,25 @@ function App() {
   
 // Controle de visibilidade do input
 const [quadradosVisiveis, setQuadradosVisiveis] = useState(Array(TOTAL_LINHAS).fill(false));
+const [quadradosVisiveis2, setQuadradosVisiveis2] = useState(Array(TOTAL_LINHAS).fill(false));
 
+// Alterna a visibilidade dos inputs quando o botão é pressionado
 const alternarVisibilidade = (linhaIndex) => {
-  setQuadradosVisiveis((prev) => {
-    const newVisibilidade = [...prev];
+  // Primeiro, alternamos a visibilidade do primeiro input
+  setQuadradosVisiveis((prevVisiveis) => {
+    const newVisibilidade = [...prevVisiveis];
     newVisibilidade[linhaIndex] = !newVisibilidade[linhaIndex];
     return newVisibilidade;
   });
+
+  // A seguir, tratamos o segundo input
+  setQuadradosVisiveis2((prevVisiveis2) => {
+    const newVisibilidade2 = [...prevVisiveis2];
+    // Se a opção do segundo input for "Normal", então mostramos o segundo input
+    newVisibilidade2[linhaIndex] = inputValues2[linhaIndex] === "Normal";
+    return newVisibilidade2;
+  });
 };
-
-
 
 
 // Estado para armazenar os valores dos selects
@@ -230,11 +239,30 @@ newInputValues[linhaIndex] = value;
 setInputValues(newInputValues);
 };
 
+
 const handleInputChange2 = (linhaIndex, value) => {
-    const newInputValues = [...inputValues2];
-    newInputValues[linhaIndex] = value;
-    setInputValues2(newInputValues);
-    };
+  const newInputValues2 = [...inputValues2];
+  newInputValues2[linhaIndex] = value;
+  setInputValues2(newInputValues2);
+
+  // Atualiza a visibilidade do segundo input com base na seleção
+  setQuadradosVisiveis2((prevVisiveis2) => {
+    const newVisibilidade2 = [...prevVisiveis2];
+    // Mostra o segundo input apenas se "Normal" for selecionado
+    newVisibilidade2[linhaIndex] = value === "Normal";
+    return newVisibilidade2;
+  });
+
+  // Quando "Normal" é selecionado, o primeiro input deve ser visível
+  if (value === "Normal") {
+    setQuadradosVisiveis((prevVisiveis) => {
+      const newVisibilidade = [...prevVisiveis];
+      // Garante que o primeiro input esteja visível
+      newVisibilidade[linhaIndex] = true;
+      return newVisibilidade;
+    });
+  }
+};
 
   return (
     <main>
@@ -293,33 +321,12 @@ const handleInputChange2 = (linhaIndex, value) => {
         id={`Linha${linhaIndex + 1}`}
         style={{ display: "flex", alignItems: "center", gap: "10px" }} // Flex para manter tudo na horizontal
       > 
-      
-             {/* Select visível quando ativado */}
-             {quadradosVisiveis[linhaIndex] && (
-              <select
-                  value={inputValues2[linhaIndex]}
-                  onChange={(e) => handleInputChange2(linhaIndex, e.target.value)}
-                  className="input-quadrado2"
-                  style={{ marginRight: "10px", display: "block" }} // Adicionando display block para garantir visibilidade
-              >
-                  <option value="Normal">Normal</option>
-                  <option value="Kick">Kick</option>
-                  <option value="Overhead">Overhead</option>
-                  <option value="Hat">Hat</option>
-                  <option value="Stopm">Stopm</option>
-                  <option value="Bass">Bass</option>
-                  <option value="Snare">Snare</option>
-                  <option value="Cowbell">Cowbell</option>
-                  <option value="Squeak">Squeak</option>
-              </select>
-              )}
-
               {/* Select visível quando ativado */}
-              {quadradosVisiveis[linhaIndex] && (
+              {quadradosVisiveis2[linhaIndex] && (
               <select
                   value={inputValues[linhaIndex]}
                   onChange={(e) => handleInputChange(linhaIndex, e.target.value)}
-                  className="input-quadrado"
+                  className="input-quadrado2"
                   style={{ marginRight: "10px", display: "block" }} // Adicionando display block para garantir visibilidade
               >
             
@@ -336,6 +343,26 @@ const handleInputChange2 = (linhaIndex, value) => {
                   <option value="A#4">A#</option>
                   <option value="B4">B</option>
                   <option value="C5">C oitava</option>
+              </select>
+              )}
+      
+             {/* Select visível quando ativado */}
+             {quadradosVisiveis[linhaIndex] && (
+              <select
+                  value={inputValues2[linhaIndex]}
+                  onChange={(e) => handleInputChange2(linhaIndex, e.target.value)}
+                  className="input-quadrado"
+                  style={{ marginRight: "10px", display: "block" }} // Adicionando display block para garantir visibilidade
+              >
+                  <option value="Normal">Normal</option>
+                  <option value="Kick">Kick</option>
+                  <option value="Overhead">Overhead</option>
+                  <option value="Hat">Hat</option>
+                  <option value="Stopm">Stopm</option>
+                  <option value="Bass">Bass</option>
+                  <option value="Snare">Snare</option>
+                  <option value="Cowbell">Cowbell</option>
+                  <option value="Squeak">Squeak</option>
               </select>
               )}
 
