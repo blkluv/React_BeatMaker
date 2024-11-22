@@ -14,7 +14,7 @@ import Squeak from "../../songs/processed-perc-squeak-low-3.wav";
 
 //Constantes DIVs
 const QUADRADOS_POR_LINHA = 16; 
-const TOTAL_LINHAS = 9; 
+const TOTAL_LINHAS = 13; 
 const NUMERO_DE_QUADRADOS = 16; 
 
 //Sons fora do tone.js
@@ -230,13 +230,21 @@ const alternarVisibilidade = (linhaIndex) => {
 
 // Estado para armazenar os valores dos selects
 const [inputValues, setInputValues] = useState([
-  'C4',  // Para a linha 1
-  'D#4',  // Para a linha 2
-  'F4',
-  'F#4',  // Para a linha 3
-  'G4',  // Para a linha 4 (vazio como padrão)
-  'A#4',   // Para a linha 5 (vazio como padrão)
-  'C5'
+  'C4',  // Tonica linha 1
+  'D#4',  // Terça Menor Linha 2
+  'F4', //quarta justa linha 3
+  'F#4',  // trítono "bluenote" linha 4
+  'G4',  //quinta justa
+  'A#4',   //sexta menor
+
+    'C5', // oitava
+    'D#5', //terca oitavada
+    'F5', //quarta oitavada
+    'F#5',//tritono
+    'G5',
+    'A#5',
+    'C6'
+
 ]);
 
 const [inputValues2, setInputValues2] = useState([
@@ -341,19 +349,31 @@ const handleInputChange2 = (linhaIndex, value) => {
                   style={{ marginRight: "10px", display: "block" }} // Adicionando display block para garantir visibilidade
               >
             
-                  <option value="C4">C</option>
-                  <option value="C#4">C#</option>
-                  <option value="D4">D</option>
-                  <option value="D#4">D#</option>
-                  <option value="E4">E</option>
-                  <option value="F4">F</option>
-                  <option value="F#4">F#</option>
-                  <option value="G4">G</option>
-                  <option value="G#4">G#</option>
-                  <option value="A4">A</option>
-                  <option value="A#4">A#</option>
-                  <option value="B4">B</option>
-                  <option value="C5">C oitava</option>
+            <option value="C4">C</option>
+              <option value="C#4">C#</option>
+              <option value="D4">D</option>
+              <option value="D#4">D#</option>
+              <option value="E4">E</option>
+              <option value="F4">F</option>
+              <option value="F#4">F#</option>
+              <option value="G4">G</option>
+              <option value="G#4">G#</option>
+              <option value="A4">A</option>
+              <option value="A#4">A#</option>
+              <option value="B4">B</option>
+              <option value="C5">C oitava</option>
+              <option value="C#5">C# oitava</option>
+              <option value="D5">D oitava</option>
+              <option value="D#5">D# oitava</option>
+              <option value="E5">E oitava</option>
+              <option value="F5">F oitava</option>
+              <option value="F#5">F# oitava</option>
+              <option value="G5">G oitava</option>
+              <option value="G#5">G# oitava</option>
+              <option value="A5">A oitava</option>
+              <option value="A#5">A# oitava</option>
+              <option value="B5">B oitava</option>
+              <option value="C6">C segunda oitava</option>
               </select>
               )}
       
