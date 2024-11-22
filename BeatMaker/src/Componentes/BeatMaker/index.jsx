@@ -198,23 +198,34 @@ function App() {
 const [quadradosVisiveis, setQuadradosVisiveis] = useState(Array(TOTAL_LINHAS).fill(false));
 const [quadradosVisiveis2, setQuadradosVisiveis2] = useState(Array(TOTAL_LINHAS).fill(false));
 
-// Alterna a visibilidade dos inputs quando o botão é pressionado
+
 const alternarVisibilidade = (linhaIndex) => {
-  // Primeiro, alternamos a visibilidade do primeiro input
   setQuadradosVisiveis((prevVisiveis) => {
     const newVisibilidade = [...prevVisiveis];
-    newVisibilidade[linhaIndex] = !newVisibilidade[linhaIndex];
+    const estavaVisivel = newVisibilidade[linhaIndex];
+
+    // Alterna o estado de visibilidade do primeiro input
+    newVisibilidade[linhaIndex] = !estavaVisivel; 
     return newVisibilidade;
   });
 
-  // A seguir, tratamos o segundo input
   setQuadradosVisiveis2((prevVisiveis2) => {
     const newVisibilidade2 = [...prevVisiveis2];
-    // Se a opção do segundo input for "Normal", então mostramos o segundo input
-    newVisibilidade2[linhaIndex] = inputValues2[linhaIndex] === "Normal";
+    const estavaVisivel = prevVisiveis2[linhaIndex];
+
+    // Apenas alterna o estado do segundo input se estiver no modo "Normal"
+    if (inputValues2[linhaIndex] === "Normal") {
+      newVisibilidade2[linhaIndex] = !estavaVisivel;
+    } else if (!estavaVisivel) {
+      // Se o primeiro input foi ativado, mantém o segundo oculto
+      newVisibilidade2[linhaIndex] = false;
+    }
+
     return newVisibilidade2;
   });
 };
+
+
 
 
 // Estado para armazenar os valores dos selects
