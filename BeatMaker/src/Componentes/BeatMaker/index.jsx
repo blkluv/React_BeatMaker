@@ -16,7 +16,7 @@ function App() {
 
   //Constantes DIVs
 const QUADRADOS_POR_LINHA = 16; 
-const [TOTAL_LINHAS, setTOTAL_LINHAS] = useState(26);
+const [TOTAL_LINHAS, setTOTAL_LINHAS] = useState(25);
 
 const NUMERO_DE_QUADRADOS = 16; 
 
