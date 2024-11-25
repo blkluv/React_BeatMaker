@@ -5,6 +5,8 @@ _BEM-VINDO AO FUTURO DA CRIAÇÃO MUSICAL!_ 🎸✨
 
 Você está diante de um projeto épico, onde tecnologia, criatividade e música se unem para formar **o sintetizador digital mais insano da história**. Aqui, você é o maestro, o beatmaker e o gênio por trás das melodias que vão revolucionar o mundo! 🌎🔥🎹🎙️🎶
 
+![image](https://github.com/user-attachments/assets/65ce28d9-6c41-4cd3-b56f-79848fcc35e3)
+
 ---
 
 ## 🌟 **Características Surreais**
@@ -13,12 +15,17 @@ Você está diante de um projeto épico, onde tecnologia, criatividade e música
 - 🎨 **Visual Vibrante:** Interface que muda dinamicamente com cores radicais para tornar cada experiência única.  
 - 🥁 **Banco de Sons Profissional:** Inclui percussões, baixos, kicks, snares e muito mais!  
 
+
+
 ---
+  ![image](https://github.com/user-attachments/assets/48e27877-11af-4b14-8d7d-94e1c0467086)
 
 ## **⚡ Funcionalidades Avançadas**
 - 🟩 **Quadrados Coloridos**: Cada cor representa uma linha única de som.
 - ⏰ **Timer Dinâmico**: Sincronização perfeita para os beats.
 - 🔊 **Triggers Especiais**: Sons personalizados para cada linha ativada.
+
+![image](https://github.com/user-attachments/assets/048f3fb0-0efa-4902-a5a3-b1058eeecb9b)
 
 ---
 
