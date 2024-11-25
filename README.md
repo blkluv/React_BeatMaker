@@ -59,6 +59,9 @@ Você está diante de um projeto épico, onde tecnologia, criatividade e música
 
 -**src/components** ⚙️ - Estrutura modular que faz tudo funcionar.
 
+![image](https://github.com/user-attachments/assets/e1bbfde7-e2ca-44ce-aa54-34b9b774947b)
+
+
 ---
 
 ## 🚀 **Como Começar?**
