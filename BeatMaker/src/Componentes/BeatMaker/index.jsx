@@ -12,9 +12,11 @@ import Snare from "../../songs/dior-snare_C_minor.wav";
 import Cowbell from "../../songs/low-percussive-brazilian-cowbell-one-shot_C.wav";
 import Squeak from "../../songs/processed-perc-squeak-low-3.wav";
 
-//Constantes DIVs
+function App() {
+
+  //Constantes DIVs
 const QUADRADOS_POR_LINHA = 16; 
-const TOTAL_LINHAS = 13; 
+const [TOTAL_LINHAS, setTOTAL_LINHAS] = useState(13);
 const NUMERO_DE_QUADRADOS = 16; 
 
 //Sons fora do tone.js
@@ -30,12 +32,17 @@ const squeak = new Tone.Player(Squeak).toDestination();
 // Cores
 const COR_NORMAL = "rgb(52, 52, 52)";
 const COR_ESPECIAL = "rgb(83, 81, 81)";
-const CORES_LINHAS = ["#34AD9D", "#C18E3B", "#0C60A4", "#318B58", "#8F30A1",
+const CORES_LINHAS = [
   "#34AD9D", "#C18E3B", "#0C60A4", "#318B58", "#8F30A1",
   "#34AD9D", "#C18E3B", "#0C60A4", "#318B58", "#8F30A1",
-
-
+  "#34AD9D", "#C18E3B", "#0C60A4", "#318B58", "#8F30A1",
+  "#34AD9D", "#C18E3B", "#0C60A4", "#318B58", "#8F30A1",
+  "#34AD9D", "#C18E3B", "#0C60A4", "#318B58", "#8F30A1",
+  "#34AD9D", "#C18E3B", "#0C60A4", "#318B58", "#8F30A1",
+  "#34AD9D", "#C18E3B", "#0C60A4", "#318B58", "#8F30A1",
+  "#34AD9D", "#C18E3B"
 ];
+
 
 // Índices dos quadrados especiais
 const QUADRADOS_ESPECIAIS = [0, 4, 8, 12, 16, 20, 24];
@@ -43,7 +50,7 @@ const QUADRADOS_ESPECIAIS = [0, 4, 8, 12, 16, 20, 24];
 // Função para calcular o tempo entre as batidas baseado no BPM
 const tempoEntreBatidas = (bpm) => (60 / bpm) * 250;
 
-function App() {
+  // Estado dos quadrados
 
   const [cores, setCores] = useState(() => {
     const inicializarCores = Array(TOTAL_LINHAS)
@@ -236,19 +243,41 @@ const [inputValues, setInputValues] = useState([
   'F#4',  // trítono "bluenote" linha 4
   'G4',  //quinta justa
   'A#4',   //sexta menor
-
     'C5', // oitava
     'D#5', //terca oitavada
     'F5', //quarta oitavada
     'F#5',//tritono
     'G5',
     'A#5',
-    'C6'
-
+    'C6',
+    'C#6',
+    'D6',
+    'D#6',
+    'E6',
+    'F6',
+    'F#6',
+    'G6',
+    'G#6',
+    'A6',
+    'A#6',
+    'B6',
+    'C7',
+    'C#7',
+    'D7',
+    'D#7',
+    'E7',
+    'F7',
+    'F#7',
+    'G7',
+    'G#7',
+    'A7',
+    'A#7',
+    'B7',
+    'C8'
 ]);
 
 const [inputValues2, setInputValues2] = useState([
-    'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal'
+    'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal'
   ]);
 
 // Função que é chamada quando o valor do select é alterado
@@ -283,6 +312,38 @@ const handleInputChange2 = (linhaIndex, value) => {
   }
 };
 
+const [botaoDesabilitado, setBotaoDesabilitado] = useState(false);
+const [botaoDesabilitado2, setBotaoDesabilitado2] = useState(false);
+useEffect(() => {
+  setBotaoDesabilitado2(TOTAL_LINHAS >= 13);
+  setBotaoDesabilitado(TOTAL_LINHAS <= 1); // Desabilitar o botão de remoção se tiver apenas 1 linha
+}, [TOTAL_LINHAS]); // Monitorando mudanças no TOTAL_LINHAS
+
+// Adicionar linha
+const maisLinha = () => {
+  setTOTAL_LINHAS((prev) => {
+    if (prev < 13) {
+      return prev + 1;
+    }
+    return prev;
+  });
+};
+
+
+
+// Retirar linha
+const menosLinha = () => {
+  if (TOTAL_LINHAS <= 1) {
+    setBotaoDesabilitado(true);  // Desabilitar o botão de remoção de linha se houver apenas uma linha
+  } else {
+    setTOTAL_LINHAS((prev) => prev - 1);  // Decrementar o número de linhas
+    setBotaoDesabilitado2(false);  // Habilitar o botão de adição de linha
+  }
+};
+
+
+
+
   return (
     <main>
       <div className="card">
@@ -304,6 +365,8 @@ const handleInputChange2 = (linhaIndex, value) => {
             <button className="Botoes" onClick={pararTimer} disabled={!isTimerRunning}>
               Parar
             </button>
+            <button className="Botoes" onClick={maisLinha} disabled={botaoDesabilitado2}>Adicionar linha</button>
+            <button className="Botoes" onClick={menosLinha} disabled={botaoDesabilitado}>Retirar linha</button>
             <Link to="/Tutorial"><button id="ajuda">Precisa de ajuda?</button></Link>
           </div>
         </div>
