@@ -1,6 +1,6 @@
-formate esse readme de maneira adequada 
 
-# 🎵 **BeatMaker Xtreme** 🎵  
+
+# 🎵 **BeatMaker** 🎵  
 _BEM-VINDO AO FUTURO DA CRIAÇÃO MUSICAL!_ 🎸✨
 
 Você está diante de um projeto épico, onde tecnologia, criatividade e música se unem para formar **o sintetizador digital mais insano da história**. Aqui, você é o maestro, o beatmaker e o gênio por trás das melodias que vão revolucionar o mundo! 🌎🔥🎹🎙️🎶
@@ -15,7 +15,7 @@ Você está diante de um projeto épico, onde tecnologia, criatividade e música
 
 ---
 
-#⚡ Funcionalidades Avançadas
+## **⚡ Funcionalidades Avançadas**
 -🟩 Quadrados Coloridos: Cada cor representa uma linha única de som.
 -⏰ Timer Dinâmico: Sincronização perfeita para os beats.
 -🔊 Triggers Especiais: Sons personalizados para cada linha ativada.
@@ -30,7 +30,7 @@ Você está diante de um projeto épico, onde tecnologia, criatividade e música
 
 ---
 
-#🎮 Modo de Uso
+#🎮**Modo de Uso**
 -Escolha seu BPM.🎼
 -Adicione ou remova linhas para customizar a grade sonora. 🎧
 -Clique nos quadrados para ativar/desativar notas. 🗿🍷
@@ -38,7 +38,7 @@ Você está diante de um projeto épico, onde tecnologia, criatividade e música
 
 
 
- #📂 Organização do Projeto
+ #📂 **Organização do Projeto**
 -src/assets 📁 - Ícones e imagens.
 -src/songs 🎵 - Banco de sons poderosos. 🗿🍷
 -src/components ⚙️ - Estrutura modular que faz tudo funcionar.
