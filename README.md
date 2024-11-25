@@ -31,17 +31,23 @@ Você está diante de um projeto épico, onde tecnologia, criatividade e música
 ---
 
 #🎮**Modo de Uso**
+
 -Escolha seu BPM.🎼
--Adicione ou remova linhas para customizar a grade sonora. 🎧
--Clique nos quadrados para ativar/desativar notas. 🗿🍷
--Pressione Iniciar e deixe os beats fluírem. 😎
+
+**-**Adicione ou remova linhas para customizar a grade sonora. 🎧
+
+**-**Clique nos quadrados para ativar/desativar notas. 🗿🍷
+
+**-**Pressione Iniciar e deixe os beats fluírem. 😎
 
 
 
- ##📂 **Organização do Projeto**
+ ## **Organização do Projeto** 📂
  
 -**src/assets** 📁 - Ícones e imagens.
+
 -**src/songs** 🎵 - Banco de sons poderosos. 🗿🍷
+
 -**src/components** ⚙️ - Estrutura modular que faz tudo funcionar.
 
 ---
