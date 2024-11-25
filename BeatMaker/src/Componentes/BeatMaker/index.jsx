@@ -16,7 +16,7 @@ function App() {
 
   //Constantes DIVs
 const QUADRADOS_POR_LINHA = 16; 
-const [TOTAL_LINHAS, setTOTAL_LINHAS] = useState(13);
+const [TOTAL_LINHAS, setTOTAL_LINHAS] = useState(26);
 const NUMERO_DE_QUADRADOS = 16; 
 
 //Sons fora do tone.js
@@ -243,37 +243,37 @@ const [inputValues, setInputValues] = useState([
   'F#4',  // trítono "bluenote" linha 4
   'G4',  //quinta justa
   'A#4',   //sexta menor
-    'C5', // oitava
-    'D#5', //terca oitavada
-    'F5', //quarta oitavada
-    'F#5',//tritono
-    'G5',
-    'A#5',
-    'C6',
-    'C#6',
-    'D6',
-    'D#6',
-    'E6',
-    'F6',
-    'F#6',
-    'G6',
-    'G#6',
-    'A6',
-    'A#6',
-    'B6',
-    'C7',
-    'C#7',
-    'D7',
-    'D#7',
-    'E7',
-    'F7',
-    'F#7',
-    'G7',
-    'G#7',
-    'A7',
-    'A#7',
-    'B7',
-    'C8'
+  'C5', // oitava
+  'D#5', //terca oitavada
+  'F5', //quarta oitavada
+  'F#5',//tritono
+  'G5',
+  'A#5',
+  'C6',
+  'C#6',
+  'D6',
+  'D#6',
+  'E6',
+  'F6',
+  'F#6',
+  'G6',
+  'G#6',
+  'A6',
+  'A#6',
+  'B6',
+  'C7',
+  'C#7',
+  'D7',
+  'D#7',
+  'E7',
+  'F7',
+  'F#7',
+  'G7',
+  'G#7',
+  'A7',
+  'A#7',
+  'B7',
+  'C8'
 ]);
 
 const [inputValues2, setInputValues2] = useState([
@@ -315,14 +315,14 @@ const handleInputChange2 = (linhaIndex, value) => {
 const [botaoDesabilitado, setBotaoDesabilitado] = useState(false);
 const [botaoDesabilitado2, setBotaoDesabilitado2] = useState(false);
 useEffect(() => {
-  setBotaoDesabilitado2(TOTAL_LINHAS >= 13);
+  setBotaoDesabilitado2(TOTAL_LINHAS >= 25);
   setBotaoDesabilitado(TOTAL_LINHAS <= 1); // Desabilitar o botão de remoção se tiver apenas 1 linha
 }, [TOTAL_LINHAS]); // Monitorando mudanças no TOTAL_LINHAS
 
 // Adicionar linha
 const maisLinha = () => {
   setTOTAL_LINHAS((prev) => {
-    if (prev < 13) {
+    if (prev < 26) {
       return prev + 1;
     }
     return prev;
@@ -341,8 +341,13 @@ const menosLinha = () => {
   }
 };
 
-
-
+//Gambiarra das linhas
+function retirarLinhas() {
+  if (TOTAL_LINHAS == 26) {
+    setTOTAL_LINHAS(1);
+  }
+}
+retirarLinhas();
 
   return (
     <main>
