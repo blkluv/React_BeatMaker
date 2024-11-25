@@ -1,4 +1,3 @@
-formate esse readme de maneira adequada 
 
 # 🎵 **BeatCrafter Xtreme** 🎵  
 _BEM-VINDO AO FUTURO DA CRIAÇÃO MUSICAL!_ 🚀🎸✨
