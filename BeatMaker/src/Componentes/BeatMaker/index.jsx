@@ -307,42 +307,42 @@ const handleInputChange2 = (linhaIndex, value) => {
   }
 };
 
-const [botaoDesabilitado, setBotaoDesabilitado] = useState(false);
-const [botaoDesabilitado2, setBotaoDesabilitado2] = useState(false);
-useEffect(() => {
-  setBotaoDesabilitado2(TOTAL_LINHAS >= 25);
-  setBotaoDesabilitado(TOTAL_LINHAS <= 1); // Desabilitar o botão de remoção se tiver apenas 1 linha
-}, [TOTAL_LINHAS]); // Monitorando mudanças no TOTAL_LINHAS
+// const [botaoDesabilitado, setBotaoDesabilitado] = useState(false);
+// const [botaoDesabilitado2, setBotaoDesabilitado2] = useState(false);
+// useEffect(() => {
+//   setBotaoDesabilitado2(TOTAL_LINHAS >= 25);
+//   setBotaoDesabilitado(TOTAL_LINHAS <= 1); // Desabilitar o botão de remoção se tiver apenas 1 linha
+// }, [TOTAL_LINHAS]); // Monitorando mudanças no TOTAL_LINHAS
 
-// Adicionar linha
-const maisLinha = () => {
-  setTOTAL_LINHAS((prev) => {
-    if (prev < 26) {
-      return prev + 1;
-    }
-    return prev;
-  });
-};
+// // Adicionar linha
+// const maisLinha = () => {
+//   setTOTAL_LINHAS((prev) => {
+//     if (prev < 26) {
+//       return prev + 1;
+//     }
+//     return prev;
+//   });
+// };
 
 
 
-// Retirar linha
-const menosLinha = () => {
-  if (TOTAL_LINHAS <= 1) {
-    setBotaoDesabilitado(true);  // Desabilitar o botão de remoção de linha se houver apenas uma linha
-  } else {
-    setTOTAL_LINHAS((prev) => prev - 1);  // Decrementar o número de linhas
-    setBotaoDesabilitado2(false);  // Habilitar o botão de adição de linha
-  }
-};
+// // Retirar linha
+// const menosLinha = () => {
+//   if (TOTAL_LINHAS <= 1) {
+//     setBotaoDesabilitado(true);  // Desabilitar o botão de remoção de linha se houver apenas uma linha
+//   } else {
+//     setTOTAL_LINHAS((prev) => prev - 1);  // Decrementar o número de linhas
+//     setBotaoDesabilitado2(false);  // Habilitar o botão de adição de linha
+//   }
+// };
 
-//Gambiarra das linhas
-function retirarLinhas() {
-  if (TOTAL_LINHAS == 26) {
-    setTOTAL_LINHAS(10);
-  }
-}
-retirarLinhas();
+// //Gambiarra das linhas
+// function retirarLinhas() {
+//   if (TOTAL_LINHAS == 26) {
+//     setTOTAL_LINHAS(10);
+//   }
+// }
+// retirarLinhas();
 
   return (
     <main>
@@ -365,8 +365,8 @@ retirarLinhas();
             <button className="Botoes" onClick={pararTimer} disabled={!isTimerRunning}>
               Parar
             </button>
-            <button className="Botoes" onClick={maisLinha} disabled={botaoDesabilitado2} id="mais">Adicionar linha</button>
-            <button className="Botoes" onClick={menosLinha} disabled={botaoDesabilitado} id="menos">Retirar linha</button>
+            {/*<button className="Botoes" onClick={maisLinha} disabled={botaoDesabilitado2} id="mais">Adicionar linha</button>
+            <button className="Botoes" onClick={menosLinha} disabled={botaoDesabilitado} id="menos">Retirar linha</button>*/}
             <Link to="/Tutorial"><button id="ajuda">Precisa de ajuda?</button></Link>
           </div>
         </div>
