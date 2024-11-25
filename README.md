@@ -16,11 +16,9 @@ Você está diante de um projeto épico, onde tecnologia, criatividade e música
 ---
 
 ## **⚡ Funcionalidades Avançadas**
--🟩 Quadrados Coloridos: Cada cor representa uma linha única de som.
-
--⏰ Timer Dinâmico: Sincronização perfeita para os beats.
-
--🔊 Triggers Especiais: Sons personalizados para cada linha ativada.
+- 🟩 **Quadrados Coloridos**: Cada cor representa uma linha única de som.
+- ⏰ **Timer Dinâmico**: Sincronização perfeita para os beats.
+- 🔊 **Triggers Especiais**: Sons personalizados para cada linha ativada.
 
 ---
 
