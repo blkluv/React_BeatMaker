@@ -47,6 +47,8 @@ Você está diante de um projeto épico, onde tecnologia, criatividade e música
 
 **-**Pressione Iniciar e deixe os beats fluírem. 😎
 
+![image](https://github.com/user-attachments/assets/0b7c3dd9-fb4d-4cee-8251-0193e1c690c4)
+
 
 
  ## **Organização do Projeto** 📂
