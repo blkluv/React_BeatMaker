@@ -365,8 +365,8 @@ const menosLinha = () => {
             <button className="Botoes" onClick={pararTimer} disabled={!isTimerRunning}>
               Parar
             </button>
-            <button className="Botoes" onClick={maisLinha} disabled={botaoDesabilitado2}>Adicionar linha</button>
-            <button className="Botoes" onClick={menosLinha} disabled={botaoDesabilitado}>Retirar linha</button>
+            <button className="Botoes" onClick={maisLinha} disabled={botaoDesabilitado2} id="mais">Adicionar linha</button>
+            <button className="Botoes" onClick={menosLinha} disabled={botaoDesabilitado} id="menos">Retirar linha</button>
             <Link to="/Tutorial"><button id="ajuda">Precisa de ajuda?</button></Link>
           </div>
         </div>

@@ -336,6 +336,13 @@ img:hover{
     margin-left: 600px;
   }
 
+  #mais {
+    display: none;
+  }
+
+  #menos {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 932px) and (orientation: landscape) {
@@ -368,4 +375,11 @@ img:hover{
     margin-top: 50px;
   }
 
+  #mais {
+    display: none;
+  }
+
+  #menos {
+    display: none;
+  }
 }
