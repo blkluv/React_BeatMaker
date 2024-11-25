@@ -17,6 +17,7 @@ function App() {
   //Constantes DIVs
 const QUADRADOS_POR_LINHA = 16; 
 const [TOTAL_LINHAS, setTOTAL_LINHAS] = useState(26);
+
 const NUMERO_DE_QUADRADOS = 16; 
 
 //Sons fora do tone.js
@@ -150,7 +151,8 @@ const tempoEntreBatidas = (bpm) => (60 / bpm) * 250;
           
             // Toca a nota apenas se o quadrado estiver ativo
             if (corAtual !== corEsperada && corAtual === CORES_LINHAS[linhaIndex]) {
-
+              
+          
                 setInputValues((currentInputValues) => {
                     setInputValues2((currentInputValues2) => {
                       const notaAtual = currentInputValues[linhaIndex];
@@ -237,43 +239,36 @@ const alternarVisibilidade = (linhaIndex) => {
 
 // Estado para armazenar os valores dos selects
 const [inputValues, setInputValues] = useState([
+
+  'C3', // oitava
+  'D#3', 
+  'F3', 
+  'F#3',
+  'G3',
+  'A#3',
+
   'C4',  // Tonica linha 1
   'D#4',  // Terça Menor Linha 2
   'F4', //quarta justa linha 3
   'F#4',  // trítono "bluenote" linha 4
   'G4',  //quinta justa
   'A#4',   //sexta menor
+
   'C5', // oitava
-  'D#5', //terca oitavada
-  'F5', //quarta oitavada
-  'F#5',//tritono
+  'D#5', 
+  'F5', 
+  'F#5',
   'G5',
   'A#5',
-  'C6',
-  'C#6',
-  'D6',
-  'D#6',
-  'E6',
-  'F6',
+
+  'C6', // oitava
+  'D#6', 
+  'F6', 
   'F#6',
   'G6',
-  'G#6',
-  'A6',
   'A#6',
-  'B6',
+
   'C7',
-  'C#7',
-  'D7',
-  'D#7',
-  'E7',
-  'F7',
-  'F#7',
-  'G7',
-  'G#7',
-  'A7',
-  'A#7',
-  'B7',
-  'C8'
 ]);
 
 const [inputValues2, setInputValues2] = useState([
@@ -344,7 +339,7 @@ const menosLinha = () => {
 //Gambiarra das linhas
 function retirarLinhas() {
   if (TOTAL_LINHAS == 26) {
-    setTOTAL_LINHAS(1);
+    setTOTAL_LINHAS(10);
   }
 }
 retirarLinhas();
@@ -417,31 +412,76 @@ retirarLinhas();
                   style={{ marginRight: "10px", display: "block" }} // Adicionando display block para garantir visibilidade
               >
             
-            <option value="C4">C</option>
-              <option value="C#4">C#</option>
-              <option value="D4">D</option>
-              <option value="D#4">D#</option>
-              <option value="E4">E</option>
-              <option value="F4">F</option>
-              <option value="F#4">F#</option>
-              <option value="G4">G</option>
-              <option value="G#4">G#</option>
-              <option value="A4">A</option>
-              <option value="A#4">A#</option>
-              <option value="B4">B</option>
-              <option value="C5">C oitava</option>
-              <option value="C#5">C# oitava</option>
-              <option value="D5">D oitava</option>
-              <option value="D#5">D# oitava</option>
-              <option value="E5">E oitava</option>
-              <option value="F5">F oitava</option>
-              <option value="F#5">F# oitava</option>
-              <option value="G5">G oitava</option>
-              <option value="G#5">G# oitava</option>
-              <option value="A5">A oitava</option>
-              <option value="A#5">A# oitava</option>
-              <option value="B5">B oitava</option>
-              <option value="C6">C segunda oitava</option>
+              <option value="C3">C3</option>
+              <option value="C#3">C#3</option>
+              <option value="D3">D3</option>
+              <option value="D#3">D#3</option>
+              <option value="E3">E3</option>
+              <option value="F3">F3</option>
+              <option value="F#3">F#3</option>
+              <option value="G3">G3</option>
+              <option value="G#3">G#3</option>
+              <option value="A3">A3</option>
+              <option value="A#3">A#3</option>
+              <option value="B3">B3</option>
+
+              <option value="C4">C4</option>
+              <option value="C#4">C#4</option>
+              <option value="D4">D4</option>
+              <option value="D#4">D#4</option>
+              <option value="E4">E4</option>
+              <option value="F4">F4</option>
+              <option value="F#4">F#4</option>
+              <option value="G4">G4</option>
+              <option value="G#4">G#4</option>
+              <option value="A4">A4</option>
+              <option value="A#4">A#4</option>
+              <option value="B4">B4</option>
+
+              <option value="C5">C5</option>
+              <option value="C#5">C#5</option>
+              <option value="D5">D5</option>
+              <option value="D#5">D#5</option>
+              <option value="E5">E5</option>
+              <option value="F5">F5</option>
+              <option value="F#5">F#5</option>
+              <option value="G5">G5</option>
+              <option value="G#5">G#5</option>
+              <option value="A5">A5</option>
+              <option value="A#5">A#5</option>
+              <option value="B5">B5</option>
+              
+              <option value="C6">C6</option>
+              <option value="C#6">C#6</option>
+              <option value="D6">D6</option>
+              <option value="D#6">D#6</option>
+              <option value="E6">E6</option>
+              <option value="F6">F6</option>
+              <option value="F#6">F#6</option>
+              <option value="G6">G6</option>
+              <option value="G#6">G#6</option>
+              <option value="A6">A6</option>
+              <option value="A#6">A#6</option>
+              <option value="B6">B6</option>
+
+              <option value="C7">C7</option>
+              <option value="C#7">C#7</option>
+              <option value="D7">D7</option>
+              <option value="D#7">D#7</option>
+              <option value="E7">E7</option>
+              <option value="F7">F7</option>
+              <option value="F#7">F#7</option>
+              <option value="G7">G7</option>
+              <option value="G#7">G#7</option>
+              <option value="A7">A7</option>
+              <option value="A#7">A#7</option>
+              <option value="B7">B7</option>
+
+              <option value="C8">C8</option>
+
+
+
+
               </select>
               )}
       
