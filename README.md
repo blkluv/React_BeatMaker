@@ -38,10 +38,11 @@ Você está diante de um projeto épico, onde tecnologia, criatividade e música
 
 
 
- #📂 **Organização do Projeto**
--src/assets 📁 - Ícones e imagens.
--src/songs 🎵 - Banco de sons poderosos. 🗿🍷
--src/components ⚙️ - Estrutura modular que faz tudo funcionar.
+ ##📂 **Organização do Projeto**
+ 
+-**src/assets** 📁 - Ícones e imagens.
+-**src/songs** 🎵 - Banco de sons poderosos. 🗿🍷
+-**src/components** ⚙️ - Estrutura modular que faz tudo funcionar.
 
 ---
 
@@ -52,8 +53,8 @@ Você está diante de um projeto épico, onde tecnologia, criatividade e música
 
 
 
-#🏆 Contribua!
--Sinta-se à vontade para clonar, remixar e contribuir com este projeto insano. Cada batida conta! 🤝
+##🏆 Contribua!
+**-Sinta-se à vontade para clonar, remixar e contribuir com este projeto insano. Cada batida conta!** 🤝
 
--Made with ❤️ by Visionary Coders
--Acesse já e prepare-se para mudar o jogo.
+**-feito com ❤️ by Visionary Coders**
+
