@@ -1,5 +1,5 @@
 import './App.css'
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, BrowserRouter } from "react-router-dom";
 import MainPage from '../View/MainPage';
 import TutorialView from '../View/Tutorial';
 import EntradaView from '../View/Entrada';
@@ -8,7 +8,7 @@ import EntradaView from '../View/Entrada';
 function App() {
   return (
     <>
-      <Router>
+      <BrowserRouter  basename='/React_BeatMaker/'>
           <Routes>
               <Route path="/"
               Component={EntradaView}/>
@@ -17,7 +17,7 @@ function App() {
               <Route path="/Tutorial"
               Component={TutorialView}/>
           </Routes>
-      </Router>
+      </BrowserRouter>
     </>
   )
 }
