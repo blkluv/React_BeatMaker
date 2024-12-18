@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./style.css";
 import * as Tone from "tone";
 import Nota from "../../assets/nota.webp";
-import Kick from "../../songs/Kick.wav";
+import Kick from "../../songs/kick.wav";
 import Overhead from "../../songs/acoustic-snare-mono-overhead-room-and-top-mic_120bpm.wav";
 import Hat from "../../songs/amapiano-closed-hat-bright.wav";
 import Stopm from "../../songs/boisterous-stomp-brazilian-kick_2bpm_C.wav";
