@@ -19,19 +19,19 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd beatmaker
+          cd BeatMaker
           npm install
 
       - name: Build project
         run: |
-          cd beatmaker
+          cd BeatMaker
           npm run build
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v3
         with:
           name: production-files
-          path: beatmaker/dist
+          path: BeatMaker/dist
 
   deploy:
     name: Deploy
