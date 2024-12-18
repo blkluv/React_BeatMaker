@@ -17,9 +17,6 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
 
-      - name: Navigate to beatmaker directory
-        run: cd beatmaker
-
       - name: Install dependencies
         run: |
           cd beatmaker
