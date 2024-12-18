@@ -67,7 +67,7 @@ Você está diante de um projeto épico, onde tecnologia, criatividade e música
 ## 🚀 **Como Começar?**
 1. **Clone o Repositório:**  
    ```bash
-   git clone https://github.com/seu-usuario/beatcrafter-xtreme.git
+   git clone https://github.com/GuidaGaita/React_BeatMaker.git
 
 
 
