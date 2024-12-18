@@ -18,16 +18,20 @@ jobs:
         uses: actions/setup-node@v3
 
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: |
+          cd BeatMaker
+          npm install
 
       - name: Build project
-        run: npm run build
+        run: |
+          cd BeatMaker
+          npm run build
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v3
         with:
           name: production-files
-          path: ./dist
+          path: BeatMaker/dist
 
   deploy:
     name: Deploy
