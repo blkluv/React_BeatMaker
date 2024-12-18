@@ -3,6 +3,10 @@
 # 🎵 **BeatMaker** 🎵  
 _BEM-VINDO AO FUTURO DA CRIAÇÃO MUSICAL!_ 🎸✨
 
+**TENTE VOCE MESMO**
+## https://guidagaita.github.io/React_BeatMaker/ 
+## https://guidagaita.github.io/React_BeatMaker/
+
 Você está diante de um projeto épico, onde tecnologia, criatividade e música se unem para formar **o sintetizador digital mais insano da história**. Aqui, você é o maestro, o beatmaker e o gênio por trás das melodias que vão revolucionar o mundo! 🌎🔥🎹🎙️🎶
 
 ![image](https://github.com/user-attachments/assets/65ce28d9-6c41-4cd3-b56f-79848fcc35e3)
