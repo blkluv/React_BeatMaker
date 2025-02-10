@@ -345,11 +345,13 @@ img:hover{
   }
 }
 
+/* Telas pequenas em modo paisagem */
 @media screen and (max-width: 932px) and (orientation: landscape) {
   .linha-quadrados {
     position: relative !important;
     left: 40px !important;
     top: -50px !important;
+    transform: scale(0.9);
   }
 
   .card {
@@ -363,23 +365,76 @@ img:hover{
   .nota-quadrado {
     position: relative;
     left: -20px;    
+    transform: scale(0.8);
   }
 
-  .input-quadrado {
+  .input-quadrado, .input-quadrado2 {
     position: relative;
     margin-top: 50px;
+    font-size: 12px;
   }
 
-  .input-quadrado2 {
-    position: relative;
-    margin-top: 50px;
-  }
-
-  #mais {
+  #mais, #menos {
     display: none;
   }
+}
 
-  #menos {
-    display: none;
+/* Telas médias */
+@media screen and (max-width: 768px) {
+  .linha-quadrados {
+    transform: scale(0.8);
+    margin-left: -20px;
+  }
+
+  .nota-quadrado {
+    transform: scale(0.7);
+  }
+
+  .input-quadrado, .input-quadrado2 {
+    font-size: 11px;
+    width: 90px;
+  }
+}
+
+/* Telas pequenas em modo retrato */
+@media screen and (max-width: 480px) {
+  .linha-quadrados {
+    transform: scale(0.6);
+    margin-left: -40px;
+  }
+
+  .card .linha:nth-child(n+5) {
+    display: none !important;
+  }
+
+  .nota-quadrado {
+    transform: scale(0.6);
+    margin-right: 0;
+  }
+
+  .input-quadrado, .input-quadrado2 {
+    font-size: 10px;
+    width: 80px;
+  }
+}
+
+/* Telas muito pequenas */
+@media screen and (max-width: 320px) {
+  .linha-quadrados {
+    transform: scale(0.5);
+    margin-left: -50px;
+  }
+
+  .card .linha:nth-child(n+4) {
+    display: none !important;
+  }
+
+  .nota-quadrado {
+    transform: scale(0.5);
+  }
+
+  .input-quadrado, .input-quadrado2 {
+    font-size: 9px;
+    width: 70px;
   }
 }
