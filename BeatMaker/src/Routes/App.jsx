@@ -1,4 +1,4 @@
-import './App.css'
+// import './App.css'
 import { BrowserRouter as Router, Routes, Route, BrowserRouter } from "react-router-dom";
 import MainPage from '../View/MainPage';
 import TutorialView from '../View/Tutorial';

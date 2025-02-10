@@ -16,7 +16,9 @@ function App() {
 
   //Constantes DIVs
 const QUADRADOS_POR_LINHA = 16; 
-const [TOTAL_LINHAS, setTOTAL_LINHAS] = useState(25);
+const [TOTAL_LINHAS, setTOTAL_LINHAS] = useState(5
+  
+);
 
 const NUMERO_DE_QUADRADOS = 16; 
 
@@ -122,74 +124,78 @@ const tempoEntreBatidas = (bpm) => (60 / bpm) * 250;
       setIsTimerRunning(true);
     
       const intervalo = tempoEntreBatidas(bpm);
-      let index = -1;
+      let index = -1; // Começamos com -1 para que o primeiro incremento resulte em 0
     
       if (intervalIdRef.current) {
         clearInterval(intervalIdRef.current);
       }
     
       intervalIdRef.current = setInterval(() => {
+        index = (index + 1) % NUMERO_DE_QUADRADOS;
+        
         // Atualiza a linha do timer visualmente
         setLinhaEspecial((prev) => {
-          const novaLinha = [...prev];
-          novaLinha.fill(COR_NORMAL);
-         
+          const novaLinha = Array(NUMERO_DE_QUADRADOS).fill(COR_NORMAL);
           novaLinha[index] = CORES_LINHAS[index % CORES_LINHAS.length];
-          
           return novaLinha;
         });
     
         // Verifica e toca as notas correspondentes
         setCores((currentCores) => {
+          if (!currentCores || !Array.isArray(currentCores)) return currentCores;
 
-          for (let linhaIndex = 0; linhaIndex < TOTAL_LINHAS; linhaIndex++) {
-            
+          for (let linhaIndex = 0; linhaIndex < currentCores.length; linhaIndex++) {
+            if (!currentCores[linhaIndex]) continue;
+
             const corAtual = currentCores[linhaIndex][index];
             const corEsperada = QUADRADOS_ESPECIAIS.includes(index)
               ? COR_ESPECIAL
               : COR_NORMAL;
-          
-            // Toca a nota apenas se o quadrado estiver ativo
+            
             if (corAtual !== corEsperada && corAtual === CORES_LINHAS[linhaIndex]) {
-              
-          
-                setInputValues((currentInputValues) => {
-                    setInputValues2((currentInputValues2) => {
-                      const notaAtual = currentInputValues[linhaIndex];
-                      const tipoSom = currentInputValues2[linhaIndex];
-            
-                      if (tipoSom === "Kick") {
-                        kick.start();
-                      } else if (tipoSom === "Overhead") {
-                        overhead.start();
-                      } else if (tipoSom === "Hat") {
-                        hat.start();
-                      } else if (tipoSom === "Stopm") {
-                        stopm.start();
-                      } else if (tipoSom === "Bass") {
-                        bass.start();
-                      } else if (tipoSom === "Snare") {
-                        snare.start();
-                      } else if (tipoSom === "Cowbell") {
-                        cowbell.start();
-                      } else if (tipoSom === "Squeak") {
-                        squeak.start();
-                      }
-                      else {
-                        synths.current[linhaIndex].triggerAttackRelease(notaAtual, "16n");
-                      }
-            
-                      return currentInputValues2; // Retorna o estado inalterado
-                    });
-            
-                    return currentInputValues; // Retorna o estado inalterado
-                  }); 
+              const notaAtual = inputValues[linhaIndex];
+              const tipoSom = inputValues2[linhaIndex];
+
+              if (!notaAtual || !tipoSom) continue;
+
+              try {
+                switch(tipoSom) {
+                  case "Kick":
+                    kick.start();
+                    break;
+                  case "Overhead":
+                    overhead.start();
+                    break;
+                  case "Hat":
+                    hat.start();
+                    break;
+                  case "Stopm":
+                    stopm.start();
+                    break;
+                  case "Bass":
+                    bass.start();
+                    break;
+                  case "Snare":
+                    snare.start();
+                    break;
+                  case "Cowbell":
+                    cowbell.start();
+                    break;
+                  case "Squeak":
+                    squeak.start();
+                    break;
+                  default:
+                    if (synths.current[linhaIndex]) {
+                      synths.current[linhaIndex].triggerAttackRelease(notaAtual, "16n");
+                    }
+                }
+              } catch (error) {
+                console.error("Erro ao tocar som:", error);
+              }
             }
           }
-          return currentCores; // Mantém o estado inalterado
+          return currentCores;
         });
-    
-        index = (index + 1) % NUMERO_DE_QUADRADOS;
       }, intervalo);
     };
     
@@ -307,42 +313,130 @@ const handleInputChange2 = (linhaIndex, value) => {
   }
 };
 
-// const [botaoDesabilitado, setBotaoDesabilitado] = useState(false);
-// const [botaoDesabilitado2, setBotaoDesabilitado2] = useState(false);
-// useEffect(() => {
-//   setBotaoDesabilitado2(TOTAL_LINHAS >= 25);
-//   setBotaoDesabilitado(TOTAL_LINHAS <= 1); // Desabilitar o botão de remoção se tiver apenas 1 linha
-// }, [TOTAL_LINHAS]); // Monitorando mudanças no TOTAL_LINHAS
+const [botaoDesabilitado, setBotaoDesabilitado] = useState(false);
+const [botaoDesabilitado2, setBotaoDesabilitado2] = useState(false);
+useEffect(() => {
+  setBotaoDesabilitado2(TOTAL_LINHAS >= 25);
+  setBotaoDesabilitado(TOTAL_LINHAS <= 1); // Desabilitar o botão de remoção se tiver apenas 1 linha
+}, [TOTAL_LINHAS]); // Monitorando mudanças no TOTAL_LINHAS
 
-// // Adicionar linha
-// const maisLinha = () => {
-//   setTOTAL_LINHAS((prev) => {
-//     if (prev < 26) {
-//       return prev + 1;
-//     }
-//     return prev;
-//   });
-// };
+// Valores iniciais para os inputs (mova para fora da função App)
+const VALORES_INICIAIS = [
+  'C3', 'D#3', 'F3', 'F#3', 'G3', 'A#3',
+  'C4', 'D#4', 'F4', 'F#4', 'G4', 'A#4',
+  'C5', 'D#5', 'F5', 'F#5', 'G5', 'A#5',
+  'C6', 'D#6', 'F6', 'F#6', 'G6', 'A#6',
+  'C7'
+];
 
+const maisLinha = () => {
+  setTOTAL_LINHAS((prev) => {
+    if (prev < 26) {
+      const novoTotal = prev + 1;
+      
+      // Atualiza as cores para a nova linha
+      setCores(currentCores => {
+        const novasCores = [...currentCores];
+        const novaLinha = Array(QUADRADOS_POR_LINHA).fill(COR_NORMAL);
+        
+        // Adiciona as cores especiais nos quadrados específicos
+        QUADRADOS_ESPECIAIS.forEach((indice) => {
+          novaLinha[indice] = COR_ESPECIAL;
+        });
+        
+        novasCores.push(novaLinha);
+        return novasCores;
+      });
 
+      // Adiciona novo sintetizador para a linha
+      synths.current.push(new Tone.Synth().toDestination());
 
-// // Retirar linha
-// const menosLinha = () => {
-//   if (TOTAL_LINHAS <= 1) {
-//     setBotaoDesabilitado(true);  // Desabilitar o botão de remoção de linha se houver apenas uma linha
-//   } else {
-//     setTOTAL_LINHAS((prev) => prev - 1);  // Decrementar o número de linhas
-//     setBotaoDesabilitado2(false);  // Habilitar o botão de adição de linha
-//   }
-// };
+      // Atualiza os valores dos inputs usando o valor inicial correspondente
+      setInputValues(currentValues => [...currentValues, VALORES_INICIAIS[novoTotal - 1] || 'C3']);
+      setInputValues2(currentValues => [...currentValues, 'Normal']);
+      
+      // Atualiza a visibilidade dos quadrados para a nova linha
+      setQuadradosVisiveis(prev => [...prev, false]);
+      setQuadradosVisiveis2(prev => [...prev, false]);
 
-// //Gambiarra das linhas
-// function retirarLinhas() {
-//   if (TOTAL_LINHAS == 26) {
-//     setTOTAL_LINHAS(10);
-//   }
-// }
-// retirarLinhas();
+      return novoTotal;
+    }
+    return prev;
+  });
+};
+
+const menosLinha = () => {
+  if (TOTAL_LINHAS <= 1) {
+    setBotaoDesabilitado(true);
+  } else {
+    setTOTAL_LINHAS((prev) => {
+      const novoTotal = prev - 1;
+      
+      // Reseta apenas a última linha removida
+      setCores(currentCores => {
+        const novasCores = [...currentCores.slice(0, novoTotal)];
+        return novasCores;
+      });
+      
+      // Atualiza os valores dos inputs removendo o último elemento
+      setInputValues(currentValues => currentValues.slice(0, novoTotal));
+      setInputValues2(currentValues => currentValues.slice(0, novoTotal));
+      
+      // Para o som da linha removida
+      if (synths.current[novoTotal]) {
+        synths.current[novoTotal].dispose();
+      }
+      synths.current = synths.current.slice(0, novoTotal);
+      
+      // Atualiza a visibilidade dos quadrados
+      setQuadradosVisiveis(prev => prev.slice(0, novoTotal));
+      setQuadradosVisiveis2(prev => prev.slice(0, novoTotal));
+      
+      return novoTotal;
+    });
+    setBotaoDesabilitado2(false);
+  }
+};
+
+//Gambiarra das linhas
+function retirarLinhas() {
+  if (TOTAL_LINHAS == 26) {
+    setTOTAL_LINHAS(10);
+  }
+}
+retirarLinhas();
+
+// Adicione a função de reset
+const resetarTudo = () => {
+  // Reseta o número de linhas para 5 (ou o valor inicial desejado)
+  setTOTAL_LINHAS(5);
+  
+  // Reseta todas as cores para o padrão inicial
+  setCores(() => {
+    const novasCores = Array(5).fill(null).map(() => 
+      Array(QUADRADOS_POR_LINHA).fill(COR_NORMAL).map((cor, index) => 
+        QUADRADOS_ESPECIAIS.includes(index) ? COR_ESPECIAL : cor
+      )
+    );
+    return novasCores;
+  });
+
+  // Reseta os valores dos inputs para os valores iniciais
+  setInputValues(VALORES_INICIAIS.slice(0, 5));
+  setInputValues2(Array(5).fill('Normal'));
+  
+  // Reseta a visibilidade dos inputs
+  setQuadradosVisiveis(Array(5).fill(false));
+  setQuadradosVisiveis2(Array(5).fill(false));
+  
+  // Para todos os sons e reseta os sintetizadores
+  synths.current.forEach(synth => synth?.dispose());
+  synths.current = Array(5).fill(null).map(() => new Tone.Synth().toDestination());
+  
+  // Reseta os estados dos botões
+  setBotaoDesabilitado(false);
+  setBotaoDesabilitado2(false);
+};
 
   return (
     <main>
@@ -365,9 +459,12 @@ const handleInputChange2 = (linhaIndex, value) => {
             <button className="Botoes" onClick={pararTimer} disabled={!isTimerRunning}>
               Parar
             </button>
-            {/*<button className="Botoes" onClick={maisLinha} disabled={botaoDesabilitado2} id="mais">Adicionar linha</button>
-            <button className="Botoes" onClick={menosLinha} disabled={botaoDesabilitado} id="menos">Retirar linha</button>*/}
-            <Link to="/Tutorial"><button id="ajuda">Precisa de ajuda?</button></Link>
+            <div>
+              <button className="Botoes" onClick={maisLinha} disabled={botaoDesabilitado2} id="mais">Adicionar linha</button>
+              <button className="Botoes" onClick={menosLinha} disabled={botaoDesabilitado} id="menos">Retirar linha</button>
+              <button className="Botoes" onClick={resetarTudo} id="reset">Resetar tudo</button>
+              <Link to="/Tutorial"><button id="ajuda">Precisa de ajuda?</button></Link>
+            </div>
           </div>
         </div>
         <div className="linha-numeros">
